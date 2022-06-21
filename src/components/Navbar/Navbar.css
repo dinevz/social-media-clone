@@ -1,0 +1,37 @@
+.navbar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    min-height: 500px;
+}
+
+.navbar-container {
+    width: 25vw;
+    background-color: #1D1F23;
+}
+
+.navbar a {
+    color: #D6D9DB;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.navbar a:hover {
+    opacity: 0.8;
+}
+.navbar a i {
+    font-size: 1.5rem;
+    margin-right: 5px;
+}
+
+.navbar a span {
+    font-size: 1.2rem;
+}
+
+.fa-bitcoin {
+    color: orange;
+}

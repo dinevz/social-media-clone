@@ -1,0 +1,17 @@
+.App {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.routes-container {
+    width: 45vw;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-left: 1px solid #D6D9DB;
+    border-right: 1px solid #D6D9DB;
+}
+
