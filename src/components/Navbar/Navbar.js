@@ -1,11 +1,20 @@
 import './Navbar.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from '../../context/UserContext'
+import * as authService from '../../services/authService'
 
 
-export default function Navbar() {
+export default function Navbar({onLogout}) {
     const {user} = useContext(UserContext);
+    const navigate = useNavigate()
+
+    const logoutHandler = (e) => {
+        e.preventDefault();
+        authService.logout(user.authToken);
+        navigate('/home');
+        onLogout();
+    }
     return (
         <div className="navbar-container">
             <nav className="navbar">
@@ -18,14 +27,24 @@ export default function Navbar() {
                 {user.authToken ?
                     (
                         <>
-                            <NavLink to="/profile" className="list-group-item list-group-item-action py-2 ripple">
-                                <i className="fa-solid fa-user fa-fw me-3"></i><span>Profile</span></NavLink>
+                            <NavLink to={'profile/' + user.id} className="list-group-item list-group-item-action py-2 ripple">
+                                <i className="fa-solid fa-user fa-fw me-3"></i><span>Profile</span>
+                            </NavLink>
                             <NavLink to="/messages" className="list-group-item list-group-item-action py-2 ripple">
-                                <i className="fa-solid fa-message fa-fw me-3"></i><span>Messages</span></NavLink>
+                                <i className="fa-solid fa-message fa-fw me-3"></i><span>Messages</span>
+                            </NavLink>
                             <NavLink to="/notifications" className="list-group-item list-group-item-action py-2 ripple">
-                                <i className="fa-solid fa-bell fa-fw me-3"></i><span>Notifications</span></NavLink>
-                            <NavLink to="/wallet" className="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                                <i className="fa-brands fa-bitcoin fa-fw me-3"></i><span>100,000 sats</span></NavLink>
+                                <i className="fa-solid fa-bell fa-fw me-3"></i><span>Notifications</span>
+                            </NavLink>
+                            <NavLink to="/wallet" className="list-group-item list-group-item-action py-2 ripple">
+                                <i className="fa-brands fa-bitcoin fa-fw me-3"></i><span>100,000 sats</span>
+                            </NavLink>
+                            <a 
+                            href='/logout'
+                            onClick={(e) => logoutHandler(e)}
+                            className="list-group-item list-group-item-action py-2 ripple"> 
+                                <i className="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span>
+                            </a>
                         </>
                     ) : (
                         <>

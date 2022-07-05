@@ -107,6 +107,9 @@
     margin-left: 5px;
     margin-top: 8px;
 }
+.post-text-container {
+    width: 100%;
+}
 
 .post-text-container ul {
     display: flex;

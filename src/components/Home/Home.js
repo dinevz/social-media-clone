@@ -1,12 +1,33 @@
 
 import './Home.css';
 import HomePostCard from './HomePostCard';
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
+import * as contentService from '../../services/contentServices'
 
 export default function Home() {
     const {user} = useContext(UserContext);
-    console.log(user.authToken);
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        contentService.getAllPosts()
+        .then(res => {
+            setPosts(res)
+            console.log(res);
+        })
+    }, [])
+
+    const createPostHandler = (e) => {
+        e.preventDefault();
+        contentService.createPost(user, e.target.content.value)
+        .then(res => {
+            setPosts([...posts, res])
+            e.target.content.value = '';
+            console.log(posts.sort((a, b) => b._createdOn - a._createdOn));
+            
+        })
+    }
+
     return (
         <div className="home-container">
             <div className="header">
@@ -16,12 +37,12 @@ export default function Home() {
                 {user.authToken ? 
                     (
 
-                        <form id="create-form" method="POST">
+                        <form id="create-form" method="POST" onSubmit={(e) => createPostHandler(e)}>
                             <div className="form-container">
-                                <img src="assets/images/default_user_icon.jpg" alt="User" />
+                                <img src={user.imageUrl ? user.imageUrl : "/assets/images/default_user_icon.jpg"} alt="User" />
                                 <div className='input-field'>
                                     <textarea type="text"
-                                        name="create-content"
+                                        name="content"
                                         rows="5"
                                         className="form-control"
                                         placeholder="What's on your mind" >
@@ -34,9 +55,9 @@ export default function Home() {
                         <h2 className="home-no-auth">Login or register to post or comment!</h2>
                     )}
             </div>
-            <HomePostCard user={user} />
-            <HomePostCard user={user} />
-            <HomePostCard user={user} />
+            {posts.sort((a, b) => b._createdOn - a._createdOn)
+                .map(post => <HomePostCard key={post._id} user={user} post={post} 
+            />)}
         </div>
     )
 }

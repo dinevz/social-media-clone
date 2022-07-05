@@ -1,0 +1,22 @@
+{
+	"recipes": {
+		"01": {
+            "_id": "01",
+            "name": "Recipe 1",
+            "img": "assets/lasagna.jpg",
+            "cookingTime": "15min"
+        },
+        "02": {
+            "_id": "02",
+            "name": "Recipe 2",
+            "img": "assets/roast.jpg"
+        },
+        "03": {
+            "_id": "03",
+            "name": "Recipe 3",
+            "img": "assets/fish.jpg"
+        }
+	}
+   
+    
+}

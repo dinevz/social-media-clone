@@ -1,20 +1,20 @@
 import { NavLink } from 'react-router-dom';
 
 
-export default function HomePostCard({user}) {
+export default function HomePostCard({user , post}) {
     return (
         <div className="post-container">
-            <img src="assets/images/default_user_icon.jpg" alt="User" />
+            <img src={user.imageUrl ? user.imageUrl : "/assets/images/default_user_icon.jpg"} alt="User" />
             <div className="post-text-container">
-                <NavLink className="profile-link" to="/user-profile" >
+                <NavLink className="profile-link" to={'/profile/' + post._ownerId} >
                     <h6 className="user-info-body">
-                        FirstName LastName
-                        <span className="small-text">@username</span>
+                        {post.userFN} {post.userLN}
+                        <span className="small-text">@{post.userUN}</span>
                         <span className="small-text"> • </span>
                         <span className="small-text">2h</span>
                     </h6>
                 </NavLink>
-                <p className="text-body">Lorem ipsum dolor, sit amet #consectetur adipisicing elit. Nobis assumenda eveniet ipsum libero mollitia vero doloremque#perspiciatis molestiae omnis, quam iure dicta reprehenderit distinctio facere labore atque, sit #ratione qu</p>
+                <p className="text-body">{post.content}</p>
                 <ul>
                     <li>
                         <i className="fa-solid fa-comment"></i>
@@ -28,9 +28,9 @@ export default function HomePostCard({user}) {
                         (
 
                             <li className="details-li">
-                                <NavLink className="details-link" to="/details/">Comment</NavLink>
+                                <NavLink className="details-link" to={"/details/" + post._id}>Comment</NavLink>
                             </li>
-                        ) : ''}
+                        ) : <li></li>}
                 </ul>
             </div>
         </div>

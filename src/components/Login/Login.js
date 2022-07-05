@@ -1,22 +1,18 @@
 import './Login.css';
 import * as authService from '../../services/authService';
-import { useContext } from 'react';
-import { UserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login({onLogin}) {
-    const user = useContext(UserContext);
     const navigate = useNavigate();
 
     const loginHandler = (e) => {
         e.preventDefault();
         let email = e.target.email.value;
         let password = e.target.password.value;
-        let rememberMe = e.target.remember.value;
         authService.login(email, password)
         .then(res => {
-            onLogin(res.accessToken);
-            navigate("/profile")
+            onLogin(res);
+            navigate("/home")
         })
         .catch(err => {
             console.error(err)
