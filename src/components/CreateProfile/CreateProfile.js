@@ -11,19 +11,7 @@ export default function CreateProfile() {
             <div className="input-container">
                 <form method="POST" >
                     <div className="container">
-                        <label htmlFor="username"><b>Username</b></label>
-                        <input id="username" type="text" placeholder="Enter username" name="username" required />
-
-                        <label htmlFor="firstName"><b>First name</b></label>
-                        <input id="firstName" type="text" placeholder="eg John" name="firstName" required />
-                        <label htmlFor="lastName"><b>Last name</b></label>
-                        <input id="lastName" type="text" placeholder="eg Doe" name="lastName" required />
-                        <label htmlFor="imageUrl"><b>Image url</b></label>
-                        <input id="imageUrl" type="url" placeholder="http://" name="imageUrl" required />
-                        <label htmlFor="about"><b>About</b></label>
-                        <input id="about" type="text" placeholder="keep it short" name="about" required />
-                        
-                        <button type="submit">Submit</button>
+                        <h1>RETIRED</h1>
                     </div>
                 </form>
             </div>

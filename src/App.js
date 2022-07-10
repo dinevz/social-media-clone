@@ -10,6 +10,7 @@ import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
 import EditProfile from './components/Profile/EditProfile';
 import CreateProfile from './components/CreateProfile/CreateProfile';
+import PostDetail from './components/Details/PostDetail';
 
 function App() {
   const [user, setUser] = useState({
@@ -24,9 +25,9 @@ function App() {
   
   const onLogin = (result) => {
     setUser({
-      ...user,
       id: result._id,
       authToken: result.accessToken,
+      ...result,
     })
   };
   
@@ -40,6 +41,10 @@ function App() {
     })
   }
 
+  const onRegister = (result) =>{
+    onLogin(result);
+  }  
+  
   return (
     <div className="App">
       
@@ -52,10 +57,11 @@ function App() {
           <Routes>
             <Route path='home' element={<Home />} />
             <Route path='login' element={<Login onLogin={onLogin}/>} />
-            <Route path='register' element={<Register onRegister={onLogin}/>} />
+            <Route path='register' element={<Register onRegister={onRegister}/>} />
             <Route path='profile/:id/' element={<Profile />} />
             <Route path='profile/:id/edit-profile' element={<EditProfile />} />
             <Route path='create-profile' element={<CreateProfile />} />
+            <Route path='details/:id/' element={<PostDetail />} />
           </Routes>
         </div>
       </UserContext.Provider>

@@ -10,21 +10,28 @@ export default function Home() {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
+        update();
+        setInterval(update, 3000);
+    }, [])
+
+    const update = () => {
         contentService.getAllPosts()
         .then(res => {
             setPosts(res)
-            console.log(res);
         })
-    }, [])
-
+        .catch(err => {
+            console.log(err);
+        })
+    }
     const createPostHandler = (e) => {
         e.preventDefault();
         contentService.createPost(user, e.target.content.value)
         .then(res => {
-            setPosts([...posts, res])
+            update();
             e.target.content.value = '';
-            console.log(posts.sort((a, b) => b._createdOn - a._createdOn));
             
+        }).catch(err => {
+            console.log(err);
         })
     }
 
@@ -55,9 +62,9 @@ export default function Home() {
                         <h2 className="home-no-auth">Login or register to post or comment!</h2>
                     )}
             </div>
-            {posts.sort((a, b) => b._createdOn - a._createdOn)
+            {posts.length >= 0 ? posts.sort((a, b) => b._createdOn - a._createdOn)
                 .map(post => <HomePostCard key={post._id} user={user} post={post} 
-            />)}
+            /> ) : ''}
         </div>
     )
 }

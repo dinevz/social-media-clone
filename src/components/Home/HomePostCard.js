@@ -28,7 +28,7 @@ export default function HomePostCard({user , post}) {
                         (
 
                             <li className="details-li">
-                                <NavLink className="details-link" to={"/details/" + post._id}>Comment</NavLink>
+                                <NavLink className="details-link" to={"/details/" + post._id}><i className="fa-solid fa-reply"></i></NavLink>
                             </li>
                         ) : <li></li>}
                 </ul>

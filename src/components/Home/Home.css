@@ -142,12 +142,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 85px;
-    height: 40px;
     align-self: self-end;
-    background-color: #008CBA;
     border: none;
-    border-radius: 15px;
     color: #D6D9DB;
     cursor: pointer;
 }

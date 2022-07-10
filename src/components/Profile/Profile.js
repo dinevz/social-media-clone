@@ -2,12 +2,15 @@ import './Profile.css'
 import { useContext } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { NavLink, useParams} from 'react-router-dom';
+import * as service from '../../services/contentServices'
 
 export default function Profile() {
     const { user } = useContext(UserContext);
     const { id } = useParams();
-    console.log(id);
 
+    service.getProfile(user.authToken)
+    .then(result => {
+    })
     return (
         <div className="profile-container">
             <div className="header">
@@ -20,7 +23,7 @@ export default function Profile() {
                         {user.firstName} {user.lastName}
                     </p>
                     <p className="user-username">@{user.username}</p>
-                    <p className="user-about">About me</p>
+                    <p className="user-about">{user.about}</p>
                 </div>
                 <div className="user-button-container">
                     {user.id === id ? (<button><NavLink to={'edit-profile'}>Edit profile</NavLink></button>) : ''}
