@@ -18,7 +18,7 @@ export const createPost = async (user, postContent) => {
 
     const result = await response.json();
 
-    if(response.ok) {
+    if (response.ok) {
         return result;
     } else {
         throw result;
@@ -30,7 +30,7 @@ export const getAllPosts = async () => {
 
     const result = await response.json()
 
-    if(response.ok) {
+    if (response.ok) {
         return result;
     } else {
         throw result;
@@ -44,8 +44,26 @@ export const getProfile = async (authToken) => {
         },
     });
     const result = await response.json()
-    if(response.ok) {
+    if (response.ok) {
         delete result["password"];
+        return result;
+    } else {
+        throw result;
+    }
+}
+
+
+export const getPost = async (authToken, postId) => {
+    const response = await fetch(`${baseUrl}/data/posts/${postId}`, {
+        headers: {
+            'Content-type': 'application/json',
+            'X-Authorization': authToken,
+        },
+    })
+
+    const result = await response.json()
+
+    if (response.ok) {
         return result;
     } else {
         throw result;

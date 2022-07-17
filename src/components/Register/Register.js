@@ -2,14 +2,15 @@ import './Register.css'
 import * as authService from '../../services/authService';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/UserContext';
 
-export default function Register({ onRegister }) {
+export default function Register() {
     const [step, setStep] = useState(1);
     const [userInfo, setUserInfo] = useState({});
     const navigate = useNavigate();
+    const {onRegister} = useAuth();
 
     useEffect(() => {
-        console.log(userInfo);
         if(step === 2) {
             authService.register(userInfo)
             .then(res => {

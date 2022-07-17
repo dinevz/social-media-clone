@@ -1,14 +1,29 @@
-import { useContext, useState } from 'react'
-import { NavLink } from 'react-router-dom';
-import { UserContext } from '../../context/UserContext'
+import { useEffect, useState } from 'react'
+import { NavLink, useParams } from 'react-router-dom';
+import { useAuth } from '../../context/UserContext'
+import { isAuthenticated } from '../../hoc/isAuthenticated'
+import { getPost } from '../../services/contentServices';
 
-
-export default function PostDetail() {
-    const { user } = useContext(UserContext);
+function PostDetail() {
+    const { user } = useAuth();
+    const { id } = useParams();
     const [post, setPost] = useState({});
 
+    useEffect(() => {
+        getPost(user.authToken, id)
+        .then(res => {
+            setPost(res)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, [user.authToken, id])
+    
     return (
         <div className="home-container">
+            <div className="header">
+                <h4 className="title">post by {post.userUN} <NavLink className="details-link" to={"/home"}><i className="fa-solid fa-arrow-left"></i></NavLink></h4>
+            </div>
             <div className="post-container">
                 <img src={user.imageUrl ? user.imageUrl : "/assets/images/default_user_icon.jpg"} alt="User" />
                 <div className="post-text-container">
@@ -65,3 +80,5 @@ export default function PostDetail() {
         </div>
     )
 }
+
+export default isAuthenticated(PostDetail);

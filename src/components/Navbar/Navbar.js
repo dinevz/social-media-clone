@@ -1,12 +1,11 @@
 import './Navbar.css'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { UserContext } from '../../context/UserContext'
 import * as authService from '../../services/authService'
+import { useAuth } from '../../context/UserContext';
 
 
-export default function Navbar({onLogout}) {
-    const {user} = useContext(UserContext);
+export default function Navbar() {
+    const {user, onLogout} = useAuth();
     const navigate = useNavigate()
 
     const logoutHandler = (e) => {

@@ -1,9 +1,11 @@
 import './Login.css';
 import * as authService from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/UserContext';
 
-export default function Login({onLogin}) {
+export default function Login() {
     const navigate = useNavigate();
+    const {onLogin} = useAuth();
 
     const loginHandler = (e) => {
         e.preventDefault();

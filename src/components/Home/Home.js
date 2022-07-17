@@ -1,12 +1,12 @@
 
 import './Home.css';
 import HomePostCard from './HomePostCard';
-import { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../context/UserContext'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../../context/UserContext'
 import * as contentService from '../../services/contentServices'
 
 export default function Home() {
-    const {user} = useContext(UserContext);
+    const {user} = useAuth();
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
@@ -17,7 +17,8 @@ export default function Home() {
     const update = () => {
         contentService.getAllPosts()
         .then(res => {
-            setPosts(res)
+            setPosts(res);
+            console.log(res);
         })
         .catch(err => {
             console.log(err);
