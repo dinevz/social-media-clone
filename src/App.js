@@ -7,7 +7,6 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
 import EditProfile from './components/Profile/EditProfile';
-import CreateProfile from './components/CreateProfile/CreateProfile';
 import PostDetail from './components/Details/PostDetail';
 import { AuthProvider } from './context/UserContext';
 
@@ -26,7 +25,6 @@ function App() {
             <Route path='register' element={<Register />} />
             <Route path='profile/:id/' element={<Profile />} />
             <Route path='profile/:id/edit-profile' element={<EditProfile />} />
-            <Route path='create-profile' element={<CreateProfile />} />
             <Route path='details/:id/' element={<PostDetail />} />
           </Routes>
         </div>

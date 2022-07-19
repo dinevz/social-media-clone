@@ -1,49 +1,78 @@
 import { createContext, useContext, useState } from "react";
-
+import * as contentService from '../services/contentServices'
 export const UserContext = createContext();
 
+const adminAccounts = [
+    '35c62d76-8152-4626-8712-eeb96381bea8',
+    '60f0cf0b-34b0-4abd-9769-8c42f830dffc',
+    '847ec027-f659-4086-8032-5173e2f9c93a',
+]
 
+const anonProfile = {
+    firstName: 'John',
+    lastName: 'Doe',
+    about: 'Very anonymous person',
+    avatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.memegenerator.es%2Fimagenes%2Fmemes%2Fthumb%2F19%2F29%2F19291209.jpg&f=1&nofb=1',
+}
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({
         id: '',
-        authToken: '',
+        accessToken: '',
         username: '',
         firstName: '',
         lastName: '',
-        imageUrl: '',
         about: '',
+        avatar: '',
     });
 
     const onLogin = (result) => {
-        setUser({
-            id: result._id,
-            authToken: result.accessToken,
-            ...result,
-        })
+        if (adminAccounts.includes(result._id)) {
+            contentService.createProfile({...anonProfile, username: result.username}, result.accessToken)
+            .then(res => {
+                console.log(res);
+            })
+            setUser({
+                id: result._id,
+                ...result,
+                ...anonProfile
+            })
+        } else {
+            setUser({
+                ...result,
+            })
+        }
     };
 
     const onLogout = () => {
         setUser({
             id: '',
-            authToken: '',
-            username: 'anon',
-            firstName: 'John',
-            lastName: 'Doe',
+            accessToken: '',
+            username: '',
+            firstName: '',
+            lastName: '',
+            about: '',
+            avatar: '',
         })
     }
 
     const onRegister = (result) => {
         onLogin(result);
     }
+
+    const setProfileToUser = (result) => {
+        setUser({ ...result, ...user })
+    }
+
     return (
-        <UserContext.Provider 
-        value={{
-            user,
-            onLogin,
-            onLogout,
-            onRegister,
-        }}
+        <UserContext.Provider
+            value={{
+                user,
+                onLogin,
+                onLogout,
+                onRegister,
+                setProfileToUser,
+            }}
         >
             {children}
         </UserContext.Provider>
@@ -51,6 +80,6 @@ export const AuthProvider = ({ children }) => {
 }
 
 export const useAuth = () => {
-    
+
     return useContext(UserContext);
 }

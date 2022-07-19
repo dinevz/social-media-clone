@@ -6,7 +6,7 @@ import { useAuth } from "../context/UserContext"
 export const isAuthenticated = (Component) => {
     const WrappedComponent = (props) => {
         const { user } = useAuth();
-        return user.authToken 
+        return user.accessToken 
         ? <Component {...props} />
         : <Navigate to='/login' />
     }

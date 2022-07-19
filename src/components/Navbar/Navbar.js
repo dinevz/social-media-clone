@@ -10,7 +10,7 @@ export default function Navbar() {
 
     const logoutHandler = (e) => {
         e.preventDefault();
-        authService.logout(user.authToken);
+        authService.logout(user.accessToken);
         navigate('/home');
         onLogout();
     }
@@ -23,7 +23,7 @@ export default function Navbar() {
                 </NavLink>
                 <NavLink to="/research" className="list-group-item list-group-item-action py-2 ripple">
                     <i className="fa-solid fa-book"></i><span>Research</span></NavLink>
-                {user.authToken ?
+                {user.accessToken ?
                     (
                         <>
                             <NavLink to={'profile/' + user.id} className="list-group-item list-group-item-action py-2 ripple">

@@ -1,5 +1,6 @@
 import './Register.css'
 import * as authService from '../../services/authService';
+import * as contentService from '../../services/contentServices'
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
@@ -8,13 +9,17 @@ export default function Register() {
     const [step, setStep] = useState(1);
     const [userInfo, setUserInfo] = useState({});
     const navigate = useNavigate();
-    const {onRegister} = useAuth();
+    const { onRegister } = useAuth();
 
     useEffect(() => {
         if(step === 2) {
-            authService.register(userInfo)
+            authService.register(userInfo.email, userInfo.password)
             .then(res => {
-                onRegister(res);
+                onRegister({...res, ...userInfo});
+                contentService.createProfile(userInfo, res.accessToken)
+                .then(res => {
+                    console.log(res);
+                })
                 setStep(1);
                 navigate(`/profile/${res._id}`)
             });
@@ -24,14 +29,11 @@ export default function Register() {
     const registerHandler = (e) => {
         e.preventDefault();
         if(e.target.password.value === e.target.password2.value) {
-            setUserInfo(oldState => {
-                return {
+            setUserInfo(oldState => ({
                     email: e.target.email.value,
                     password: e.target.password.value,
                     ...oldState,
-                }
-                
-            });
+                }));
         } else {
             alert("password dont match")
         }
@@ -39,13 +41,14 @@ export default function Register() {
 
     const stepChange = (e) => {
         e.preventDefault();
-        let form = e.target.parentElement.parentElement;
+        let form = e.currentTarget;
+        console.log(form.username);
         setUserInfo({
             username: form.username.value,
             firstName: form.firstName.value,
             lastName: form.lastName.value,
-            imageUrl: form.imageUrl.value,
             about: form.about.value,
+            avatar: '',
         })
         form.username.value = '';
         form.firstName.value = '';
@@ -58,7 +61,7 @@ export default function Register() {
                 <h4 className="title">Register<i className="fa-solid fa-user-pen"></i></h4>
             </div>
             {step === 1 ?
-                <form method="POST">
+                <form method="POST" onSubmit={(e) => stepChange(e)}>
                     <div className="container step-1">
                         <label htmlFor="username"><b>Username</b></label>
                         <input id="username" type="text" placeholder="Enter username" name="username" required />
@@ -67,11 +70,16 @@ export default function Register() {
                         <input id="firstName" type="text" placeholder="eg John" name="firstName" required />
                         <label htmlFor="lastName"><b>Last name</b></label>
                         <input id="lastName" type="text" placeholder="eg Doe" name="lastName" required />
-                        <label htmlFor="imageUrl"><b>Image url</b></label>
-                        <input id="imageUrl" type="url" placeholder="http://" name="imageUrl" />
                         <label htmlFor="about"><b>About</b></label>
-                        <input id="about" type="text" placeholder="keep it short" name="about" required />
-                        <button type="button" onClick={(e) => stepChange(e)}>Next</button>
+                        <textarea 
+                            type="text"
+                            name="about"
+                            id="about"
+                            rows="5"
+                            className="form-control"
+                            placeholder="Like where are you from..">
+                        </textarea>
+                        <button type="submit">Next</button>
                     </div>
                 </form>
                 :

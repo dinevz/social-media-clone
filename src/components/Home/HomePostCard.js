@@ -29,9 +29,11 @@ export default function HomePostCard({ user, post }) {
 
         return msToTime(elapsedTime);
     }
+
+
     return (
         <div className="post-container">
-            <img src={user.imageUrl ? user.imageUrl : "/assets/images/default_user_icon.jpg"} alt="User" />
+            <img src={post.userImg ? post.userImg : "/assets/images/default_user_icon.jpg"} alt="User" />
             <div className="post-text-container">
                 <NavLink className="profile-link" to={'/profile/' + post._ownerId} >
                     <h6 className="user-info-body">
@@ -51,7 +53,7 @@ export default function HomePostCard({ user, post }) {
                         <i className="fa-solid fa-heart"></i>
                         <span className="small-text">10</span>
                     </li>
-                    {user.authToken ?
+                    {user.accessToken ?
                         (
 
                             <li className="details-li">

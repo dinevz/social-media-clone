@@ -9,32 +9,34 @@ export default function Home() {
     const {user} = useAuth();
     const [posts, setPosts] = useState([])
 
+    
     useEffect(() => {
         update();
-        setInterval(update, 3000);
+        setInterval(update, 5000);
     }, [])
 
     const update = () => {
         contentService.getAllPosts()
         .then(res => {
             setPosts(res);
-            console.log(res);
         })
         .catch(err => {
-            console.log(err);
+            // console.error(err);
         })
     }
     const createPostHandler = (e) => {
         e.preventDefault();
         contentService.createPost(user, e.target.content.value)
         .then(res => {
+            console.log(res);
             update();
             e.target.content.value = '';
             
         }).catch(err => {
-            console.log(err);
+            // console.log(err);
         })
     }
+
 
     return (
         <div className="home-container">
@@ -42,12 +44,12 @@ export default function Home() {
                 <h4 className="title">Home<i className="fa-solid fa-bolt-lightning"></i></h4>
             </div>
             <div className='create-container'>
-                {user.authToken ? 
+                {user.accessToken ? 
                     (
 
                         <form id="create-form" method="POST" onSubmit={(e) => createPostHandler(e)}>
                             <div className="form-container">
-                                <img src={user.imageUrl ? user.imageUrl : "/assets/images/default_user_icon.jpg"} alt="User" />
+                                <img src={user.avatar ? user.avatar : "/assets/images/default_user_icon.jpg"} alt="User" />
                                 <div className='input-field'>
                                     <textarea type="text"
                                         name="content"

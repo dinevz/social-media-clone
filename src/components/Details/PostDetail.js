@@ -10,22 +10,22 @@ function PostDetail() {
     const [post, setPost] = useState({});
 
     useEffect(() => {
-        getPost(user.authToken, id)
+        getPost(user.accessToken, id)
         .then(res => {
             setPost(res)
         })
         .catch(err => {
             console.log(err);
         })
-    }, [user.authToken, id])
-    
+    }, [user.accessToken, id])
+
     return (
         <div className="home-container">
             <div className="header">
                 <h4 className="title">post by {post.userUN} <NavLink className="details-link" to={"/home"}><i className="fa-solid fa-arrow-left"></i></NavLink></h4>
             </div>
             <div className="post-container">
-                <img src={user.imageUrl ? user.imageUrl : "/assets/images/default_user_icon.jpg"} alt="User" />
+                <img src={user.avatar ? user.avatar : "/assets/images/default_user_icon.jpg"} alt="User" />
                 <div className="post-text-container">
                     <NavLink className="profile-link" to={'/profile/' + post._ownerId} >
                         <h6 className="user-info-body">
@@ -45,7 +45,7 @@ function PostDetail() {
                             <i className="fa-solid fa-heart"></i>
                             <span className="small-text">10</span>
                         </li>
-                        {user.authToken ?
+                        {user.accessToken ?
                             (
 
                                 <li className="details-li">
@@ -56,12 +56,12 @@ function PostDetail() {
                 </div>
             </div>
             <div className='create-container'>
-                {user.authToken ?
+                {user.accessToken ?
                     (
 
                         <form id="create-form" method="POST">
                             <div className="form-container">
-                                <img src={user.imageUrl ? user.imageUrl : "/assets/images/default_user_icon.jpg"} alt="User" />
+                                <img src={user.avatar ? user.avatar : "/assets/images/default_user_icon.jpg"} alt="User" />
                                 <div className='input-field'>
                                     <textarea type="text"
                                         name="content"
