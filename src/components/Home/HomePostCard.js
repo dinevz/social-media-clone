@@ -2,17 +2,29 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { timestampConverter } from '../../helpers/timestampConverter';
 import { getCommentCount } from '../../services/commentService';
+import { getLikesCount, like } from '../../services/likeService';
 
 
 export default function HomePostCard({ user, post }) {
-    const [commentsCount, setCommentsCount] = useState(0)
+    const [commentsCount, setCommentsCount] = useState(0);
+    const [likesCount, setLikesCount] = useState(0);
+
     useEffect(() => {
         getCommentCount(user.accessToken, post._id)
-            .then(res => {
-                setCommentsCount(res)
-            })
+            .then(res => {setCommentsCount(res)})
+        getLikesCount(user.accessToken, post._id)
+        .then(res => {setLikesCount(res)})
     }, [user.accessToken, post._id])
-    
+
+    const likeHandler = (e) => {
+        e.preventDefault();
+        like(post._id, user.accessToken)
+        .then(res => {
+            setLikesCount(oldState => oldState + 1)
+            console.log(res);
+        })
+    }
+
     return (
         <div className="post-container">
             <img src={post.userImg ? post.userImg : "/assets/images/default_user_icon.jpg"} alt="User" />
@@ -31,9 +43,9 @@ export default function HomePostCard({ user, post }) {
                         <i className="fa-solid fa-comment"></i>
                         <span className="small-text">{commentsCount}</span>
                     </li>
-                    <li>
+                    <li onClick={(e) => likeHandler(e)}>
                         <i className="fa-solid fa-heart"></i>
-                        <span className="small-text">10</span>
+                        <span className="small-text">{likesCount}</span>
                     </li>
                     {user.accessToken ?
                         (
