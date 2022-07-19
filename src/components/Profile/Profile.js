@@ -2,21 +2,30 @@ import './Profile.css'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { NavLink, useParams } from 'react-router-dom';
-import * as contentService from '../../services/contentServices'
+import * as profileService from '../../services/profileService'
+import { isAuthenticated } from '../../hoc/isAuthenticated'
 
-export default function Profile() {
+function Profile() {
     const { user } = useContext(UserContext);
     const { id } = useParams();
     const [profile, setProfile] = useState({})
     
     useEffect(() => {
-        contentService.getProfile(user.accessToken, id)
+        profileService.getProfile(user.accessToken, id)
             .then(result => {
                 setProfile(result[0])
             })
             .catch(err => {
 
             })
+        profileService.getMyCommentsCount(user.accessToken, id)
+        .then(res => {
+            setProfile(oldState => ({...oldState, commentsCount: res}))
+        })
+        profileService.getMyPostsCount(user.accessToken, id)
+        .then(res => {
+            setProfile(oldState => ({...oldState, postsCount: res}))
+        })
     }, [id, user])
 
 
@@ -40,8 +49,8 @@ export default function Profile() {
                 </div>
                 <div className="profile-card-stats-container">
                     <div className="stats-container"><p>0</p><p>research</p></div>
-                    <div className="stats-container"><p>0</p><p>comments</p></div>
-                    <div className="stats-container"><p>0</p><p>likes</p></div>
+                    <div className="stats-container"><p>{profile.postsCount}</p><p>posts</p></div>
+                    <div className="stats-container"><p>{profile.commentsCount}</p><p>comments</p></div>
                 </div>
             </div>
             <div className="profile-posts-container">
@@ -52,3 +61,5 @@ export default function Profile() {
         </div>
     )
 }
+
+export default isAuthenticated(Profile);

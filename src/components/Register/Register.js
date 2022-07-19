@@ -1,6 +1,6 @@
 import './Register.css'
 import * as authService from '../../services/authService';
-import * as contentService from '../../services/contentServices'
+import * as profileService from '../../services/profileService'
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
@@ -16,7 +16,7 @@ export default function Register() {
             authService.register(userInfo.email, userInfo.password)
             .then(res => {
                 onRegister({...res, ...userInfo});
-                contentService.createProfile(userInfo, res.accessToken)
+                profileService.createProfile(userInfo, res.accessToken)
                 .then(res => {
                     console.log(res);
                 })

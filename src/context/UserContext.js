@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
-import * as contentService from '../services/contentServices'
+import * as profileService from '../services/profileService'
 export const UserContext = createContext();
 
-const adminAccounts = [
+let adminAccounts = [
     '35c62d76-8152-4626-8712-eeb96381bea8',
     '60f0cf0b-34b0-4abd-9769-8c42f830dffc',
     '847ec027-f659-4086-8032-5173e2f9c93a',
@@ -28,9 +28,10 @@ export const AuthProvider = ({ children }) => {
 
     const onLogin = (result) => {
         if (adminAccounts.includes(result._id)) {
-            contentService.createProfile({...anonProfile, username: result.username}, result.accessToken)
+            profileService.createProfile({...anonProfile, username: result.username}, result.accessToken)
             .then(res => {
                 console.log(res);
+                adminAccounts[res._ownerId] = '';
             })
             setUser({
                 id: result._id,
@@ -38,7 +39,9 @@ export const AuthProvider = ({ children }) => {
                 ...anonProfile
             })
         } else {
+            
             setUser({
+                id: result._id,
                 ...result,
             })
         }

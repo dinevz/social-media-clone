@@ -1,4 +1,6 @@
-export default function EditProfile() {
+import { isAuthenticated } from "../../hoc/isAuthenticated"
+
+function EditProfile() {
     return (
         <div className="profile-container">
         <div className="header">
@@ -7,3 +9,5 @@ export default function EditProfile() {
         </div>
     )
 }
+
+export default isAuthenticated(EditProfile);

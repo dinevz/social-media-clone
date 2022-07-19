@@ -28,7 +28,6 @@ export default function Home() {
         e.preventDefault();
         contentService.createPost(user, e.target.content.value)
         .then(res => {
-            console.log(res);
             update();
             e.target.content.value = '';
             
@@ -36,7 +35,6 @@ export default function Home() {
             // console.log(err);
         })
     }
-
 
     return (
         <div className="home-container">
