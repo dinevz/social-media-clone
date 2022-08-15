@@ -1,4 +1,4 @@
-const baseUrl = 'https://postterr.herokuapp.com/';
+const baseUrl = 'https://postterr.herokuapp.com';
 
 export const createComment = async (postId, content, accessToken) => {
     const response = await fetch(`${baseUrl}/data/comments`, {

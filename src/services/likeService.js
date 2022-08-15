@@ -1,4 +1,4 @@
-const baseUrl = 'https://postterr.herokuapp.com/';
+const baseUrl = 'https://postterr.herokuapp.com';
 
 export const like = async (postId, accessToken) => {
     const response = await fetch(`${baseUrl}/data/likes`, {

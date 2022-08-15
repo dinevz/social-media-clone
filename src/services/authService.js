@@ -1,4 +1,4 @@
-const baseUrl = 'https://postterr.herokuapp.com/';
+const baseUrl = 'https://postterr.herokuapp.com';
 
 export const login = async (email, password) => {
     const response = await fetch(`${baseUrl}/users/login`, {
