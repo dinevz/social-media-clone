@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3030';
+const baseUrl = 'https://postterr.herokuapp.com/';
 
 export const createPost = async (user, postContent, postMedia) => {
     const response = await fetch(`${baseUrl}/data/posts`, {
