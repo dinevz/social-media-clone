@@ -1,0 +1,47 @@
+.navbar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    min-height: 500px;
+}
+
+.navbar-container {
+    width: 25vw;
+    background-color: var(--background-color);
+}
+
+.navbar a {
+    display: flex;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 15px;
+    text-align: start;
+    flex-direction: row;
+    align-items: baseline;
+    width: fit-content;
+}
+
+.navbar a:hover {
+    background-color: var(--border-color);
+    color: white;
+    border-radius: 30px;
+}
+.navbar a i {
+    font-size: 1.5rem;
+    text-align: start;
+}
+
+.navbar a span {
+    font-size: 1.3rem;
+    margin-left: 10px;
+}
+
+.navbar .research {
+    margin-left: 20px;
+}
+
+.fa-bitcoin {
+    color: orange;
+}

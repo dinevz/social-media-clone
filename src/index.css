@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -ms-overflow-style: none;  /* hide scrollbar IE and Edge */
+  scrollbar-width: none;  /* hide scrollbar Firefox */
+  scroll-behavior: smooth;
+}
+
+:root {
+  --text-color: #D6D9DB;
+  --blue-color: #008CBA;
+  --border-color: rgb(47, 51, 54);
+  --background-color: #000000;
+}
+
+*::-webkit-scrollbar {
+  
+  display: none;  /* hide scrollbar Chrome */
+}
+
+body {
+  overflow: hidden;
+  font-size: 16px;
+  font-family: 'Roboto';
+  background-color: var(--background-color);
+}

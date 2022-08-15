@@ -1,0 +1,167 @@
+.home-container {
+    width: 100%;
+    height: 100%;
+}
+.home-no-auth {
+    color: #D6D9DB;
+    text-align: center;
+    padding: 30px;
+}
+
+.header {
+    width: 100%;
+    height: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* text-align: center; */
+    /* border-bottom: 1px solid #D6D9DB; */
+}
+
+.create-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.title {
+    display: flex;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    width: 90%;
+    color: #D6D9DB;
+    font-size: 1.5rem;
+}
+.input-field {
+    padding-top: 10px;
+}
+
+
+.user-avatar, .post-container .user-avatar {
+    height: 50px;
+    border-radius: 50%;
+    align-self: self-start;
+}
+
+
+.like:hover {
+    cursor: pointer;
+    color: #E52B50!important;
+    opacity: 0.8;
+}
+
+.comment:hover {
+    opacity: 0.8;
+    color: #7CB9E8;
+    cursor: pointer;
+}
+
+.fa-trash:hover {
+    color: #FF0000!important;
+
+}
+
+
+#create-form button:hover {
+    opacity: 0.8;
+}
+
+.profile-link {
+    color: #D6D9DB;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.post-container {
+    display: flex;
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.user-info-body {
+    margin-left: 5px;
+    display: inline-block;
+}
+.text-body {
+    color: #D6D9DB;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    line-height: 1.1rem;
+    margin: 8px 0px 8px 5px;
+    white-space: pre-wrap;
+}
+
+.post-text-container {
+    width: 100%;
+}
+
+.post-text-container ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    color: #D6D9DB;
+    margin-top: 10px;
+    margin-left: 5px;
+    align-items: center;
+}
+
+.small-text {
+    font-size: 0.8rem;
+}
+
+.post-text-container ul .small-text {
+    margin-left: 3px;
+}
+
+.details-link {
+    text-decoration: none;
+    color: #D6D9DB;
+}
+
+.details-li:hover {
+    opacity: 0.8;
+}
+
+.details-li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: self-end;
+    border: none;
+    color: #D6D9DB;
+    cursor: pointer;
+}
+
+
+
+
+.emoji-buttons-wrappers {
+    display: flex;
+    align-items: center;
+}
+.media-container {
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    padding-top: 10px;
+}
+
+.close-media {
+    width: 30px;
+    height: 30px;
+    /* background-color: black; */
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.close-media:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.media-container .home-card {
+    margin-top: 10px;
+}

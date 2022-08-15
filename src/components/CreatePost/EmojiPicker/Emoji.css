@@ -1,0 +1,76 @@
+.emoji-picker-react div.skin-tones-list {
+    display: none!important;
+}
+
+aside.emoji-picker-react {
+    border: none!important;
+    background: var(--background-color)!important;
+}
+
+.emoji-picker-react input.emoji-search {
+    border: 2px solid aqua!important;
+    border-radius: 10px!important;
+    background-color: var(--background-color)!important;
+    color: white!important;
+    font-family: 'FontAwesome'!important;
+}
+
+.emoji-picker-react .emoji-group:before {
+    background-color: var(--background-color)!important;
+}
+
+.emoji-picker-react .emoji-categories button.icn-smileys_people {
+    background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f600.png')!important;
+}
+
+.emoji-picker-react .emoji-categories button.icn-animals_nature {
+    background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f435.png')!important;
+}
+
+.emoji-picker-react .emoji-categories button.icn-food_drink {
+    background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f34c.png')!important;
+}
+.emoji-picker-react .emoji-categories button.icn-travel_places {
+    background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f30d.png')!important;
+}
+.emoji-picker-react .emoji-categories button.icn-activities {
+    background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f388.png')!important;
+}
+.emoji-picker-react .emoji-categories button.icn-objects {
+    background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f97d.png')!important;
+}
+
+.emoji-picker-react .emoji-categories button.icn-symbols {
+    background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f3e7.png')!important;
+}
+.emoji-picker-react .emoji-categories button.icn-flags {
+    background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f3c1.png')!important;
+}
+
+.emoji-picker-react img.emoji-img {
+    -webkit-user-drag: none;
+}
+
+.emoji-picker-react .emoji-scroll-wrapper {
+    scroll-behavior: initial;
+}
+
+.emoji-icon {
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    /* text-align: center; */
+    display: flex!important;
+    align-items: center;
+    justify-content: center;
+    color: #008CBA;
+    font-size: 1.3rem;
+}
+.emoji-icon:hover {
+    cursor: pointer;
+    background-color: var(--border-color);
+}
+
+#popover-basic {
+    z-index: 999;
+}
