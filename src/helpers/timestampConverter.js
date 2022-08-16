@@ -22,6 +22,6 @@ export const timestampConverter = (timestamp) => {
     let timeNow = new Date();
     let timePosted = new Date(timestamp);
     let elapsedTime = timeNow.getTime() - timePosted.getTime();
-
+    
     return msToTime(elapsedTime);
 }

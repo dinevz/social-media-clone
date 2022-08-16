@@ -26,6 +26,33 @@ export const createPost = async (user, postContent, postMedia) => {
     }
 }
 
+export const editPost = async (accessToken, postID, post) => {
+    const response = await fetch(`${baseUrl}/data/posts/${postID}`, {
+        method: "PUT",
+        headers: {
+            'Content-type': 'application/json',
+            'X-Authorization': accessToken,
+        },
+        body: JSON.stringify({
+            userImg: post.userImg,
+            userFN: post.userFN,
+            userLN: post.userLN,
+            userUN: post.userUN,
+            content: post.content,
+            media: post.media,
+        })
+    })
+
+    const result = await response.json();
+
+    if (response.ok) {
+        return result;
+    } else {
+        throw result;
+    }
+}
+
+
 export const getAllPosts = async () => {
     const response = await fetch(`${baseUrl}/data/posts`)
 

@@ -14,38 +14,29 @@
     justify-content: center;
 }
 
-.modal {
-    display: none;
-    /* Hidden by default */
+
+.gif-modal {
     position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
+    z-index: 11;
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
+    height: 100vh;
     overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.5);
 }
-
 /* Modal Content/Box */
-.modal-content {
+.gif-modal-content {
     background-color: var(--background-color);
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #008CBA;
     border-radius: 10px;
     box-shadow: 0 5px 10px #efefef;
-    width: 600px;
-    height: 75vh;
+    width: 650px;
+    height: 500px;
     overflow: scroll;
+    overflow-x: hidden;
 
 }
 
@@ -63,7 +54,7 @@
     opacity: 0.8;
 }
 
-.modal-header {
+.gif-modal-header {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -94,13 +85,13 @@
     opacity: 0.7;
 }
 
-.searchbar {
+.gif-searchbar {
     font-family: 'FontAwesome';
     width: 200px;
     height: 2rem;
     outline: none;
     /* writing-mode: horizontal-tb; */
-    color: #888;
+    color: var(--text-color);
     background-color: var(--background-color);
     border-radius: 10px;
     border: 1px solid var(--blue-color);
@@ -118,4 +109,20 @@
     font-size: 0.9rem;
     cursor: pointer;
     float: right;
+}
+
+.gif-search-btn {
+    font-size: 1.2rem;
+    background-color: black;
+    color: var(--text-color);
+    border: 1px solid var(--blue-color);
+    border-radius: 20px;
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+}
+
+.gif-search-btn:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }

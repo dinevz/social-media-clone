@@ -35,6 +35,7 @@ export default function EmojiPicker({ contentUpdate }) {
                             <Picker 
                             onEmojiClick={onEmojiClick}
                             preload={true}
+                            native={false}
                             searchPlaceholder={decode('&#xf002;')} />
                     </Popover>
                 </Overlay>

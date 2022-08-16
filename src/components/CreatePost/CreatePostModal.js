@@ -12,12 +12,12 @@ export default function CreatePostModal() {
     }
     const ModalComponent = ({show}) => {
         return(
-            <div className="modal" style={{
+            <div className="create-post-modal" style={{
                 display: show ? 'block' : 'none',
             }}>
                 
-                <div className="modal-content">
-                    <div className="modal-header">
+                <div className="create-post-modal-content">
+                    <div className="create-post-modal-header">
                         <span onClick={() => hideModalHandler()} className="close">&times;</span>
                     </div>
                     

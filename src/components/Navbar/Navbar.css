@@ -5,10 +5,12 @@
     align-content: center;
     justify-content: space-around;
     min-height: 500px;
+    position: sticky;
+    top: 0;
 }
 
 .navbar-container {
-    width: 25vw;
+    width: 28vw;
     background-color: var(--background-color);
 }
 

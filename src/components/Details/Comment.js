@@ -19,31 +19,36 @@ export default function Comment({comment, user, updateComments}) {
         })
     }, [comment._ownerId, user.accessToken])
 
-    if(profile === undefined) {
-        return (
-            <h1>Loading ...</h1>
-        )
-    }
-
     const deleteCommentHandler = () => {
         deleteComment(comment._id, user.accessToken)
         .then(res => {
             updateComments();
         })
     }
+
     return (
         <div className="post-container comments">
-                <img src={profile.avatar ? profile.avatar : "/assets/images/default_user_icon.jpg"} alt="User" />
-                <div className="post-text-container">
-                    <NavLink className="profile-link" to={'/profile/' + profile._ownerId} >
-                        <h6 className="user-info-body">
-                            {profile.firstName} {profile.lastName}
-                            <span className="small-text">@{profile.username}</span>
-                            <span className="small-text"> • </span>
-                            <span className="small-text">{timestampConverter(comment._createdOn)} ago</span>
-                        </h6>
-                    </NavLink>
-                    <p className="text-body">{comment.content ? postContentShortener(comment.content).join('\n') : 'Loading...'}</p>
+            {comment._createdOn ? (
+                <>
+                    <img class="user-avatar" src={profile.avatar ? profile.avatar : "/assets/images/default_user_icon.jpg"} alt="User" />
+                    <div className="post-text-container">
+                        <NavLink className="profile-link" to={'/profile/' + profile._ownerId} >
+                            <h6 className="user-info-body">
+                                {profile.firstName} {profile.lastName}
+                                <span className="small-text">@{profile.username}</span>
+                                <span className="small-text"> • </span>
+                                <span className="small-text">{timestampConverter(comment._createdOn)} ago</span>
+                            </h6>
+                        </NavLink>
+                        <p className="text-body">{comment.content ? postContentShortener(comment.content).join('\n') : ''}</p>
+                        <div className="media-container home-card">
+                            {comment.media ?
+                                (<>
+                                    <img className="media" alt="gif/img" src={comment.media}></img>
+                                </>
+                                )
+                                : ''}
+                        </div>
                         <ul>
                             <li>
                             </li>
@@ -52,14 +57,18 @@ export default function Comment({comment, user, updateComments}) {
                                 <span className="small-text">0</span>
                             </li>
                             <li>
-                                {comment._ownerId === user._id 
-                                ? <i onClick={() => deleteCommentHandler()}className="fa-solid fa-trash trash" style={{
-                                    cursor: 'pointer',}}></i>
-                                : ''}
-                                
+                                {comment._ownerId === user._id
+                                    ? <i onClick={() => deleteCommentHandler()} className="fa-solid fa-trash trash" style={{
+                                        cursor: 'pointer',
+                                    }}></i>
+                                    : ''}
+
                             </li>
                         </ul>
-                </div>
-            </div>
+                    </div>
+                </>
+            ) : <h1>Loading</h1>}
+                
+        </div>
     )
 }

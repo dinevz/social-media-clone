@@ -7,13 +7,13 @@ import GifPickerModal from "./GifPickerModal";
 export default function GifPicker({mediaUpdate}) {
 
     const [modalShow, setModalShow] = useState(false);
-    const [trendingGifs, setTrendingGifs] = useState([]);
+    const [gifs, setGifs] = useState([]);
     const [offset, setOffset] = useState(0); 
 
     useEffect(() => {
         getTrendingGifs(0)
             .then(res => {
-                setTrendingGifs(res.data)
+                setGifs(res.data)
             })
             .catch(err => {
                 console.log(err);
@@ -27,14 +27,18 @@ export default function GifPicker({mediaUpdate}) {
     const loadMore = (offnum) => {
         getTrendingGifs(offnum + 15)
             .then(res => {
-                setTrendingGifs(oldData => [...oldData, ...res.data]);
+                setGifs(oldData => [...oldData, ...res.data]);
                 setOffset(offnum + 15);
             })
             .catch(err => {
                 console.log(err);
             })
     }
-    return (
+
+    const updateGifs = (value) => {
+        setGifs(value);
+    }
+        return (
         <>
             <div className="gif-icon" onClick={() => setModalShow(old => !old)}>
                 <GifIcon />
@@ -43,10 +47,11 @@ export default function GifPicker({mediaUpdate}) {
             <GifPickerModal
                 show={modalShow}
                 hideModal={hideModal}
-                trendingGifs={trendingGifs}
+                gifs={gifs}
                 loadMore={loadMore}
                 offset={offset}
                 mediaUpdate={mediaUpdate}
+                updateGifs={updateGifs}
             />
         </>
     )

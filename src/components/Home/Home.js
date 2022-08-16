@@ -9,7 +9,7 @@ import { PostContext } from '../../context/postsContext';
 export default function Home() {
     const { user } = useAuth();
     const { posts, update } = useContext(PostContext);
-   
+    
 
 
     return (

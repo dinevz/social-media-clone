@@ -1,6 +1,6 @@
 const baseUrl = 'https://postterr.herokuapp.com';
 
-export const createComment = async (postId, content, accessToken) => {
+export const createComment = async (postId, content, commentMedia, accessToken) => {
     const response = await fetch(`${baseUrl}/data/comments`, {
         method: "POST",
         headers: {
@@ -10,6 +10,7 @@ export const createComment = async (postId, content, accessToken) => {
         body: JSON.stringify({
             postId: postId,
             content: content,
+            media: commentMedia,
         })
     })
 

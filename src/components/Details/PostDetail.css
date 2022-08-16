@@ -2,3 +2,12 @@
     cursor: default;
 }
 
+.details-link-back {
+    width: 90%;
+    position: absolute;
+    text-decoration: none;
+    color: #D6D9DB;
+    display: flex;
+    justify-content: flex-end;
+}
+
