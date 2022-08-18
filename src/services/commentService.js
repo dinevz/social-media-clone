@@ -24,10 +24,10 @@ export const createComment = async (postId, content, commentMedia, accessToken) 
 }
 
 
-export const getComments = async (authToken, postId) => {
+export const getComments = async (postId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=postId%3D%22${postId}%22`, {
         headers: { 
-            'X-Authorization': authToken,
+            'Content-type': 'application/json',
         },
     });
     const result = await response.json()
@@ -38,10 +38,10 @@ export const getComments = async (authToken, postId) => {
     }
 }
 
-export const getCommentCount = async (authToken, postId) => {
+export const getCommentCount = async (postId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=postId%3D%22${postId}%22&count`, {
         headers: { 
-            'X-Authorization': authToken,
+            'Content-type': 'application/json',
         },
     });
 

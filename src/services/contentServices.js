@@ -66,11 +66,10 @@ export const getAllPosts = async () => {
 }
 
 
-export const getPost = async (authToken, postId) => {
+export const getPost = async (postId) => {
     const response = await fetch(`${baseUrl}/data/posts/${postId}`, {
         headers: {
             'Content-type': 'application/json',
-            'X-Authorization': authToken,
         },
     })
 

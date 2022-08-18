@@ -1,21 +1,19 @@
 import './Emoji.css';
 import Picker from 'emoji-picker-react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { decode } from 'html-entities';
 import { Overlay, Popover } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 
-export default function EmojiPicker({ contentUpdate }) {
-    const [show, setShow] = useState(false);
+export default function EmojiPicker({ contentUpdate , handleClick, show}) {
+    
     const ref = useRef(null);
     const target = useRef(null);
-
+    const location = useLocation()
     const onEmojiClick = (event, emojiObject) => {
         contentUpdate(emojiObject.emoji)
     };
 
-    const handleClick = (event) => {
-        setShow(!show);
-    };
 
     return (
         <>
@@ -27,7 +25,7 @@ export default function EmojiPicker({ contentUpdate }) {
                     transition={true}
                     show={show}
                     target={target.current}
-                    placement="bottom-start"
+                    placement={location.pathname.startsWith('/details') ? 'top-start' : 'bottom-start'}
                     container={ref}
                     onHide={handleClick}
                 >
@@ -35,6 +33,9 @@ export default function EmojiPicker({ contentUpdate }) {
                             <Picker 
                             onEmojiClick={onEmojiClick}
                             preload={true}
+                            groupVisibility={{
+                                recently_used: false,
+                              }}
                             native={false}
                             searchPlaceholder={decode('&#xf002;')} />
                     </Popover>

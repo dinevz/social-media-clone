@@ -17,20 +17,20 @@ export default function HomePostCard({ user, post, updatePosts }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getCommentCount(user.accessToken, post._id)
+        getCommentCount(post._id)
             .then(res => { setCommentsCount(res) })
-        getLikesCount(user.accessToken, post._id)
+        getLikesCount(post._id)
             .then(res => {
                 setLikesCount(res)
             })
-        getIsLiked(user.accessToken, post._id)
+        getIsLiked(post._id)
             .then(res => {
                 if (res.filter(x => x._ownerId === user._id).length > 0) {
                     setIsLiked(true)
                 }
             })
 
-    }, [user.accessToken, post._id, commentsCount, user._id])
+    }, [post._id, commentsCount, user._id])
 
     const likeHandler = (e) => {
         e.preventDefault();
@@ -63,14 +63,14 @@ export default function HomePostCard({ user, post, updatePosts }) {
                 navigate('/home');
             })
     }
-
+    
     return (
         <div className="post-container">
             {post._createdOn ? (
                 <>
                     <img className="user-avatar" src={post.userImg ? post.userImg : "/assets/images/default_user_icon.jpg"} alt="User" />
                     <div className="post-text-container">
-                        <div class="post-text-wrapper">
+                        <div className="post-text-wrapper">
                             <NavLink className="profile-link" to={'/profile/' + post._ownerId} >
                                 <h6 className="user-info-body">
                                     {post.userFN} {post.userLN}
@@ -84,7 +84,9 @@ export default function HomePostCard({ user, post, updatePosts }) {
                                 <div className="dropdown">
                                     <span className="triple-dots" ><i className="fa-solid fa-ellipsis"></i></span>
                                     <div className="dropdown-content">
-                                        <NavLink className="edit-btn" to={'/edit/' + post._id}>Edit</NavLink>
+                                        <div className="dropdown-content-flex">
+                                            <NavLink className="edit-btn" to={'/edit/' + post._id}>Edit</NavLink>
+                                        </div>
                                     </div>
                                 </div>
                                 : ''}

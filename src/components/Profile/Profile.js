@@ -11,19 +11,18 @@ function Profile() {
     const [profile, setProfile] = useState({})
     
     useEffect(() => {
-        profileService.getProfile(user.accessToken, id)
+        profileService.getProfile(id)
             .then(result => {
                 setProfile(result[0])
             })
             .catch(err => {
-
+                console.log(err);
             })
-        profileService.getMyCommentsCount(user.accessToken, id)
+        profileService.getMyCommentsCount(id)
         .then(res => {
-            console.log(res);
             setProfile(oldState => ({...oldState, commentsCount: res}))
         })
-        profileService.getMyPostsCount(user.accessToken, id)
+        profileService.getMyPostsCount(id)
         .then(res => {
             setProfile(oldState => ({...oldState, postsCount: res}))
         })
@@ -35,7 +34,7 @@ function Profile() {
                 <h4 className="title">Profile<i className="fa-solid fa-user fa-fw me-3"></i></h4>
             </div>
             <div className="profile-card-container">
-                <img id="profile-img" src={profile.avatar ? profile.avatar : "/assets/images/default_user_icon.jpg"} alt="User" />
+                <img id="profile-img" src={profile?.avatar ? profile.avatar : "/assets/images/default_user_icon.jpg"} alt="User" />
                 <div className="profile-card-text-container">
                     <p className="user-name">
                         {profile.firstName} {profile.lastName}
@@ -44,13 +43,13 @@ function Profile() {
                     <p className="user-about">{profile.about}</p>
                 </div>
                 <div className="user-button-container">
-                    {user.id === id ? (<button><NavLink to={'edit-profile'}>Edit profile</NavLink></button>) : ''}
+                    {user._id === id ? (<button><NavLink to={'edit-profile'}>Edit profile</NavLink></button>) : ''}
                     <button>Message</button>
                 </div>
                 <div className="profile-card-stats-container">
                     <div className="stats-container"><p>0</p><p>research</p></div>
-                    <div className="stats-container"><p>{profile.postsCount}</p><p>posts</p></div>
-                    <div className="stats-container"><p>{profile.commentsCount}</p><p>comments</p></div>
+                    <div className="stats-container"><p>{profile.postsCount || 0}</p><p>posts</p></div>
+                    <div className="stats-container"><p>{profile.commentsCount || 0}</p><p>comments</p></div>
                 </div>
             </div>
             <div className="profile-posts-container">

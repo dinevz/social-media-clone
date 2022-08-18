@@ -26,10 +26,10 @@ export const createProfile = async (user, accessToken) => {
 }
 
 
-export const getProfile = async (authToken, userId) => {
+export const getProfile = async (userId) => {
     const response = await fetch(`${baseUrl}/data/profile?where=_ownerId%3D%22${userId}%22`, {
-        headers: { 
-            'X-Authorization': authToken,
+        headers: {
+            'Content-type': 'application/json',
         },
     });
     const result = await response.json()
@@ -42,7 +42,7 @@ export const getProfile = async (authToken, userId) => {
 
 export const getMyComments = async (authToken, userId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=_ownerId%3D%22${userId}%22&count`, {
-        headers: { 
+        headers: {
             'X-Authorization': authToken,
         },
     });
@@ -56,7 +56,7 @@ export const getMyComments = async (authToken, userId) => {
 
 export const getMyPosts = async (authToken, userId) => {
     const response = await fetch(`${baseUrl}/data/posts?where=_ownerId%3D%22${userId}%22&count`, {
-        headers: { 
+        headers: {
             'X-Authorization': authToken,
         },
     });
@@ -68,10 +68,10 @@ export const getMyPosts = async (authToken, userId) => {
     }
 }
 
-export const getMyCommentsCount = async (authToken, userId) => {
+export const getMyCommentsCount = async (userId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=_ownerId%3D%22${userId}%22&count`, {
-        headers: { 
-            'X-Authorization': authToken,
+        headers: {
+            'Content-type': 'application/json',
         },
     });
     const result = await response.json()
@@ -82,9 +82,23 @@ export const getMyCommentsCount = async (authToken, userId) => {
     }
 }
 
-export const getMyPostsCount = async (authToken, userId) => {
+export const getMyPostsCount = async (userId) => {
     const response = await fetch(`${baseUrl}/data/posts?where=_ownerId%3D%22${userId}%22&count`, {
-        headers: { 
+        headers: {
+            'Content-type': 'application/json',
+        },
+    });
+    const result = await response.json()
+    if (response.ok) {
+        return result;
+    } else {
+        throw result;
+    }
+}
+
+export const searchByUsername = async (authToken, username) => {
+    const response = await fetch(`${baseUrl}/data/profile?where=username%3D%22${username}%22`, {
+        headers: {
             'X-Authorization': authToken,
         },
     });

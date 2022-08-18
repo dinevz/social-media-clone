@@ -1,6 +1,8 @@
 .profile-container {
-    width: 100%;
+    width: 600px;
     height: 100%;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
 }
 
 #profile-img {

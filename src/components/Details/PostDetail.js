@@ -20,19 +20,19 @@ function PostDetail() {
 
 
     useEffect(() => {
-        getPost(user.accessToken, id)
+        getPost(id)
             .then(res => {
                 setPost(res)
             })
             .catch(err => {
                 console.log(err);
             })
-        commentService.getComments(user.accessToken, id)
+        commentService.getComments(id)
             .then(res => {
                 setComments(res)
             }).catch(err => { console.log(err); })
 
-    }, [user.accessToken, id, user._id])
+    }, [id, user._id])
 
 
    
@@ -44,11 +44,13 @@ function PostDetail() {
         ]))
     }
     const updateCommentsHandler = () => {
-        commentService.getComments(user.accessToken, id)
+        commentService.getComments(id)
             .then(res => {
                 setComments(res)
             }).catch(err => { console.log(err); })
     }
+    console.log(post._ownerId === user._id);
+    console.log(user);
     return (
         <div className="home-container">
             <div className="header">
@@ -57,7 +59,7 @@ function PostDetail() {
             <HomePostCard post={post} user={user} updatePosts={update}/>
             <CreatePost parentClass={'details'} commentObj={{id, setCommentsHandler,}}/>
             {
-                comments.length >= 0 ? comments.sort((a, b) => b._createdOn - a._createdOn)
+                comments.length > 0 ? comments.sort((a, b) => b._createdOn - a._createdOn)
                     .map(x => <Comment className="not-comment" key={x._id} comment={x} user={user} updateComments={updateCommentsHandler}
                     />) : ''
             }

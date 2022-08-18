@@ -4,26 +4,63 @@ import postContentShortener from "../../helpers/postContentShortener"
 import { timestampConverter } from "../../helpers/timestampConverter"
 import { deleteComment } from "../../services/commentService"
 import * as profileService from "../../services/profileService"
+import { getLikesCount, like, getIsLiked, dislike } from '../../services/likeService';
 
-export default function Comment({comment, user, updateComments}) {
+export default function Comment({ comment, user, updateComments }) {
     const [profile, setProfile] = useState({
         avatar: '',
         firstName: '',
         lastName: '',
 
     })
+
+    const [likesCount, setLikesCount] = useState(0);
+    const [isLiked, setIsLiked] = useState(false);
     useEffect(() => {
-        profileService.getProfile(user.accessToken, comment._ownerId)
-        .then(res => {
-            setProfile(res[0])
-        })
-    }, [comment._ownerId, user.accessToken])
+        profileService.getProfile(comment._ownerId)
+            .then(res => {
+                setProfile(res[0])
+            })
+        getLikesCount(comment._id)
+            .then(res => {
+                setLikesCount(res)
+            })
+        getIsLiked(comment._id)
+            .then(res => {
+                if (res.filter(x => x._ownerId === user._id).length > 0) {
+                    setIsLiked(true)
+                }
+            })
+    }, [comment._ownerId, comment._id, user._id])
 
     const deleteCommentHandler = () => {
         deleteComment(comment._id, user.accessToken)
-        .then(res => {
-            updateComments();
-        })
+            .then(res => {
+                updateComments();
+            })
+    }
+    const likeHandler = (e) => {
+        e.preventDefault();
+        if (comment._ownerId === user._id) {
+            return
+        }
+        if (!isLiked) {
+            like(comment._id, user.accessToken)
+                .then(res => {
+                    setLikesCount(oldState => oldState + 1)
+                    setIsLiked(true);
+                })
+        } else {
+            getIsLiked(comment._id)
+                .then(res => {
+                    let likeId = res.filter(x => x._ownerId === user._id)
+                    dislike(likeId[0]._id, user.accessToken)
+                        .then(result => {
+                            setLikesCount(oldState => oldState - 1)
+                            setIsLiked(false);
+                        })
+                })
+        }
     }
 
     return (
@@ -52,9 +89,13 @@ export default function Comment({comment, user, updateComments}) {
                         <ul>
                             <li>
                             </li>
-                            <li>
-                                <i className="fa-solid fa-heart like"></i>
-                                <span className="small-text">0</span>
+                            <li onClick={(e) => likeHandler(e)}>
+                                <div className="like">
+                                    <i className="fa-solid fa-heart" style={{
+                                        color: isLiked ? '#E52B50' : ''
+                                    }}></i>
+                                    <span className="small-text">{likesCount}</span>
+                                </div>
                             </li>
                             <li>
                                 {comment._ownerId === user._id
@@ -68,7 +109,7 @@ export default function Comment({comment, user, updateComments}) {
                     </div>
                 </>
             ) : <h1>Loading</h1>}
-                
+
         </div>
     )
 }

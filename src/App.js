@@ -10,6 +10,7 @@ import PostDetail from './components/Details/PostDetail';
 import { AuthProvider } from './context/UserContext';
 import { PostProvider } from './context/postsContext';
 import PostEdit from './components/Edit/PostEdit';
+import Scout from './components/Scout/Scout';
 
 // <CoingeckoWidget /> -> coingecko component
 function App() {
@@ -29,6 +30,7 @@ function App() {
               <Route path='profile/:id/edit-profile' element={<EditProfile />} />
               <Route path='details/:id/' element={<PostDetail />} />
               <Route path='edit/:id/' element={<PostEdit />} />
+              <Route path='scout' element={<Scout />} />
             </Routes>
           </div>
         </PostProvider>

@@ -12,6 +12,7 @@ export default function CreatePost({update, parentClass, hideModalHandler, comme
     const { user } = useAuth();
     const [postContent, setPostContent] = useState('');
     const [postMedia, setPostMedia] = useState('');
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
     const contentUpdate = (value) => {
         if (postContent === '') {
@@ -30,10 +31,12 @@ export default function CreatePost({update, parentClass, hideModalHandler, comme
         if (e.target.content.value === '' && postMedia === '') {
             return alert('Type something')
         }
+        console.log(user);
         contentService.createPost(user, postContent, postMedia)
             .then(res => {
                 setPostContent('');
                 setPostMedia('');
+                setShowEmojiPicker(false);
                 update();
                 hideModalHandler();
             }).catch(err => {
@@ -49,9 +52,14 @@ export default function CreatePost({update, parentClass, hideModalHandler, comme
                 commentObj.setCommentsHandler(res);
                 setPostContent('');
                 setPostMedia('');
+                setShowEmojiPicker(false);
             })
     }
     
+    const handleClick = (event) => {
+        setShowEmojiPicker(!showEmojiPicker);
+    };
+
     return (
         <div className={'create-container ' + parentClass}>
             {user.accessToken ?
@@ -89,7 +97,7 @@ export default function CreatePost({update, parentClass, hideModalHandler, comme
                                 
                                 <div className="home-buttons-wrappers">
                                     <div className="emoji-buttons-wrappers">
-                                        <EmojiPicker contentUpdate={contentUpdate} />
+                                        <EmojiPicker contentUpdate={contentUpdate} handleClick={handleClick} show={showEmojiPicker}/>
                                         <GifPicker mediaUpdate={mediaUpdate}/>
                                         <ImageUpload />
                                     </div>

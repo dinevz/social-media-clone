@@ -30,22 +30,39 @@ export const AuthProvider = ({ children }) => {
 
     const onLogin = (result) => {
         if (adminAccounts.includes(result._id)) {
-            profileService.createProfile({...anonProfile, username: result.username}, result.accessToken)
-            .then(res => {
-                console.log(res);
-                adminAccounts[res._ownerId] = '';
-            })
-            setUser({
-                id: result._id,
-                ...result,
-                ...anonProfile
-            })
+            profileService.getProfile(result._id)
+                .then(res => {
+                    if (res.length === 0) {
+                        profileService.createProfile({ ...anonProfile, username: result.username }, result.accessToken)
+                            .then(response => {
+                                setUser({
+                                    ...response[0],
+                                    ...result,
+                                    _id: result._id,
+                                })
+                            })
+                    } else {
+                        setUser({
+                            ...res[0],
+                            ...result,
+                            _id: result._id,
+                        })
+
+                    }
+                }).catch(err => {
+
+                })
+
         } else {
-            
-            setUser({
-                id: result._id,
-                ...result,
-            })
+            profileService.getProfile(result._id)
+                .then(res => {
+                    setUser({
+                        ...res[0],
+                        ...result,
+                        _id: result._id,
+                    })
+
+                })
         }
     };
 

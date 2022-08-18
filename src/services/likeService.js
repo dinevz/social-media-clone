@@ -40,10 +40,10 @@ export const dislike = async (postId, accessToken) => {
 }
 
 
-export const getMyLikes = async (authToken, userId) => {
+export const getMyLikes = async (userId) => {
     const response = await fetch(`${baseUrl}/data/likes?where=_ownerId%3D%22${userId}%22`, {
         headers: { 
-            'X-Authorization': authToken,
+            'Content-type': 'application/json',
         },
     });
     const result = await response.json()
@@ -54,10 +54,10 @@ export const getMyLikes = async (authToken, userId) => {
     }
 }
 
-export const getLikesCount = async (authToken, postId) => {
+export const getLikesCount = async (postId) => {
     const response = await fetch(`${baseUrl}/data/likes?where=postId%3D%22${postId}%22&distinct=_ownerId&count`, {
         headers: { 
-            'X-Authorization': authToken,
+            'Content-type': 'application/json',
         },
     });
 
@@ -69,10 +69,10 @@ export const getLikesCount = async (authToken, postId) => {
     }
 }
 
-export const getIsLiked = async (authToken, postId, userId) => {
+export const getIsLiked = async (postId) => {
     const response = await fetch(`${baseUrl}/data/likes?where=postId%3D%22${postId}%22`, {
         headers: { 
-            'X-Authorization': authToken,
+            'Content-type': 'application/json',
         },
     });
 

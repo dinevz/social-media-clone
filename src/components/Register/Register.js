@@ -1,7 +1,7 @@
 import './Register.css'
 import * as authService from '../../services/authService';
 import * as profileService from '../../services/profileService'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
 
@@ -11,20 +11,6 @@ export default function Register() {
     const navigate = useNavigate();
     const { onRegister } = useAuth();
 
-    useEffect(() => {
-        if(step === 2) {
-            authService.register(userInfo.email, userInfo.password)
-            .then(res => {
-                onRegister({...res, ...userInfo});
-                profileService.createProfile(userInfo, res.accessToken)
-                .then(res => {
-                    console.log(res);
-                })
-                setStep(1);
-                navigate(`/profile/${res._id}`)
-            });
-        }
-    }, [userInfo, onRegister, step, navigate])
 
     const registerHandler = (e) => {
         e.preventDefault();

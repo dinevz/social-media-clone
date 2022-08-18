@@ -18,12 +18,11 @@ export default function PostEdit () {
     const [post, setPost] = useState({});
 
     useEffect(() => {
-        getPost(user.accessToken, id)
+        getPost(id)
         .then(res => {
             setPost(res);
-            console.log(res);
         }).catch(err => console.log(err))
-    }, [id, user.accessToken])
+    }, [id])
 
     const contentUpdate = (value) => {
         if (post.content === '') {
@@ -42,6 +41,7 @@ export default function PostEdit () {
         editPost(user.accessToken, id, post)
         .then(res => {
             update();
+            navigate(`/details/${id}`)
         })
         .catch(err => console.log(err))
     }

@@ -28,8 +28,8 @@ export default function Navbar({update}) {
                             <NavLink to="/home" className="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                                 <i className="fa-solid fa-house fa-fw me-3"></i><span>Home</span>
                             </NavLink>
-                            <NavLink to="/research" className="list-group-item list-group-item-action py-2 ripple">
-                                <i className="fa-solid fa-book"></i><span className="research">Research</span></NavLink>
+                            <NavLink to="/scout" className="list-group-item list-group-item-action py-2 ripple">
+                                <i className="fa-solid fa-magnifying-glass"></i><span className="research">Scout</span></NavLink>
                             <NavLink to="/notifications" className="list-group-item list-group-item-action py-2 ripple">
                                 <i className="fa-solid fa-bell fa-fw me-3"></i><span>Notifications</span>
                             </NavLink>
@@ -37,7 +37,7 @@ export default function Navbar({update}) {
                                 <i className="fa-solid fa-message fa-fw me-3"></i><span>Messages</span>
                             </NavLink>
 
-                            <NavLink to={'profile/' + user.id} className="list-group-item list-group-item-action py-2 ripple">
+                            <NavLink to={'profile/' + user._id} className="list-group-item list-group-item-action py-2 ripple">
                                 <i className="fa-solid fa-user fa-fw me-3"></i><span>Profile</span>
                             </NavLink>
                             <CreatePostModal />
