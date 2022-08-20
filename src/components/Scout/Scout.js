@@ -73,7 +73,7 @@ export default function Scout() {
     return (
         <div className="home-container">
             <div className="header">
-                <form ref={ref} className="scout-searchbar-form" autocomplete="off">
+                <form ref={ref} className="scout-searchbar-form" autoComplete="off">
                     <input ref={target} className="scout-searchbar" type="text" name="searchbar" placeholder={'Search users'} onChange={(e) => searchUser(e.target.value)}/>
                     <Overlay
                         rootClose={true}
