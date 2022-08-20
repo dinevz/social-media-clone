@@ -39,8 +39,9 @@ export const AuthProvider = ({ children }) => {
         })
     }
 
-    const onRegister = (result) => {
-        onLogin(result);
+    const onRegister = (result, accessToken, _id) => {
+        console.log(result);
+        setUser({...result, accessToken, _id});
     }
 
     const setProfileToUser = (result) => {

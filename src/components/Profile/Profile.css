@@ -7,6 +7,7 @@
 
 #profile-img {
     height: 100px;
+    width: 100px;
     border-radius: 50%;
 }
 
@@ -90,4 +91,50 @@
 .profile-posts-container a {
     text-decoration: none;
     color: var(--text-color);
+}
+
+.posted-by {
+    float: right;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.top-link-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+span.username-profile {
+    color: var(--blue-color);
+    text-decoration: none;
+}
+
+.username-profile {
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: capitalize;
+    color: gray;
+}
+
+a.username-profile:hover {
+    opacity: 0.6;
+    background-color: rgb(145, 100, 145);
+    color: black;
+}
+
+p.small-text {
+    color: white;
+    letter-spacing: 1px;
+    border: 1px solid var(--border-color);
+    padding: 5px;
+}
+
+.profile-link-style {
+    color: gray;
+    text-decoration: none;
+}
+.profile-link-style:hover {
+    opacity: 0.6;
+    background-color: rgb(145, 100, 145);
+    color: black;
 }

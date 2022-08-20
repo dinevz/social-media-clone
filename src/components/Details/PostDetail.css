@@ -9,5 +9,10 @@
     color: #D6D9DB;
     display: flex;
     justify-content: flex-end;
+    /* background-color: black; */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
 }
 

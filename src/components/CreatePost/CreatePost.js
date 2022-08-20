@@ -31,9 +31,9 @@ export default function CreatePost({update, parentClass, hideModalHandler, comme
         if (e.target.content.value === '' && postMedia === '') {
             return alert('Type something')
         }
-        console.log(user);
         contentService.createPost(user, postContent, postMedia)
             .then(res => {
+                console.log(res);
                 setPostContent('');
                 setPostMedia('');
                 setShowEmojiPicker(false);
@@ -49,6 +49,7 @@ export default function CreatePost({update, parentClass, hideModalHandler, comme
 
         commentService.createComment(commentObj.id, postContent, postMedia, user.accessToken)
             .then(res => {
+                console.log(res);
                 commentObj.setCommentsHandler(res);
                 setPostContent('');
                 setPostMedia('');

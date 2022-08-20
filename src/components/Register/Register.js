@@ -4,10 +4,12 @@ import * as profileService from '../../services/profileService'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
+import Spinner from '../Spinner/Spinner';
 
 export default function Register() {
     const [step, setStep] = useState(1);
     const [userInfo, setUserInfo] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const { onRegister } = useAuth();
 
@@ -17,15 +19,16 @@ export default function Register() {
         if(e.target.password.value === e.target.password2.value) {
             if(step === 2) {
                 authService.register(e.target.email.value, e.target.password.value)
-                .then(res => {
-                    onRegister({...res, ...userInfo});
-                    profileService.createProfile(userInfo, res.accessToken)
-                    .then(res => {
-                        console.log(res);
-                    })
-                    setStep(1);
-                    navigate(`/profile/${res._id}`)
+                .then(result => {
+                    profileService.createProfile(userInfo, e.target.email.value, result.accessToken)
+                        .then(res => {
+                            onRegister({...res}, result.accessToken, result._id);
+                            setStep(1);
+                            navigate(`/profile/${result._id}`);
+                            setIsLoading(false);
+                        })
                 });
+                setIsLoading(true);
             }
         } else {
             alert("password dont match")
@@ -35,7 +38,6 @@ export default function Register() {
     const stepChange = (e) => {
         e.preventDefault();
         let form = e.currentTarget;
-        console.log(form.username);
         setUserInfo({
             username: form.username.value,
             firstName: form.firstName.value,
@@ -53,7 +55,7 @@ export default function Register() {
             <div className="header">
                 <h4 className="title">Register<i className="fa-solid fa-user-pen"></i></h4>
             </div>
-            {step === 1 ?
+            {isLoading ? <Spinner /> : step === 1 ?
                 <form method="POST" onSubmit={(e) => stepChange(e)}>
                     <div className="container step-1">
                         <label htmlFor="username"><b>Username</b></label>

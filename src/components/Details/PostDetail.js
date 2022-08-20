@@ -1,6 +1,6 @@
 import './PostDetail.css';
 import { useContext, useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
 import { isAuthenticated } from '../../hoc/isAuthenticated';
 import { getPost } from '../../services/contentServices';
@@ -17,7 +17,7 @@ function PostDetail() {
     const { id } = useParams();
     const [post, setPost] = useState({});
     const [comments, setComments] = useState([{ content: '' }]);
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         getPost(id)
@@ -49,12 +49,11 @@ function PostDetail() {
                 setComments(res)
             }).catch(err => { console.log(err); })
     }
-    console.log(post._ownerId === user._id);
-    console.log(user);
+
     return (
         <div className="home-container">
             <div className="header">
-                <h4 className="title">post by {post.userUN} <NavLink className="details-link-back" to={"/home"}><i className="fa-solid fa-arrow-left"></i></NavLink></h4>
+                <h4 className="title">post by {post.userUN} <button className="details-link-back" onClick={() => navigate(-1)}><i className="fa-solid fa-arrow-left"></i></button></h4>
             </div>
             <HomePostCard post={post} user={user} updatePosts={update}/>
             <CreatePost parentClass={'details'} commentObj={{id, setCommentsHandler,}}/>

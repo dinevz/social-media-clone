@@ -1,71 +1,13 @@
-import { decode } from 'html-entities';
-import { useContext, useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { timestampConverter } from '../../helpers/timestampConverter';
-import { getCommentCount } from '../../services/commentService';
-import { deletePost } from '../../services/contentServices';
-import { getLikesCount, like, getIsLiked, dislike } from '../../services/likeService';
-import postContentShortener from '../../helpers/postContentShortener';
-import { PostContext } from '../../context/postsContext';
+import { decode } from "html-entities";
+import { NavLink } from "react-router-dom";
+import postContentShortener from "../../helpers/postContentShortener";
+import { timestampConverter } from "../../helpers/timestampConverter";
 
 
 
+export default function DummyHomePostCard({ post, user , dummyComments }) {
+    
 
-export default function HomePostCard({ user, post, updatePosts }) {
-    const [commentsCount, setCommentsCount] = useState(0);
-    const [likesCount, setLikesCount] = useState(0);
-    const [isLiked, setIsLiked] = useState(false);
-    const navigate = useNavigate();
-    const { update } = useContext(PostContext); 
-
-    useEffect(() => {
-        getCommentCount(post._id)
-            .then(res => { setCommentsCount(res) })
-        getLikesCount(post._id)
-            .then(res => {
-                setLikesCount(res)
-            })
-        getIsLiked(post._id)
-            .then(res => {
-                if (res.filter(x => x._ownerId === user._id).length > 0) {
-                    setIsLiked(true)
-                }
-            })
-
-    }, [post._id, commentsCount, user._id])
-
-    const likeHandler = (e) => {
-        e.preventDefault();
-        if (post._ownerId === user._id) {
-            return
-        }
-        if (!isLiked) {
-            like(post._id, post.userUN, 'post', user.accessToken)
-                .then(res => {
-                    setLikesCount(oldState => oldState + 1)
-                    setIsLiked(true);
-                })
-        } else {
-            getIsLiked(post._id)
-                .then(res => {
-                    let likeId = res.filter(x => x._ownerId === user._id)
-                    console.log(res);
-                    dislike(likeId[0]._id, user.accessToken)
-                        .then(result => {
-                            setLikesCount(oldState => oldState - 1)
-                            setIsLiked(false);
-                        })
-                })
-        }
-    }
-
-    const deletePostHandler = () => {
-        deletePost(post._id, user.accessToken)
-            .then(res => {
-                updatePosts();
-                update();
-            })
-    }
     
     return (
         <div className="post-container">
@@ -74,7 +16,7 @@ export default function HomePostCard({ user, post, updatePosts }) {
                     <img className="user-avatar" src={post.userImg ? post.userImg : "/assets/images/default_user_icon.jpg"} alt="User" />
                     <div className="post-text-container">
                         <div className="post-text-wrapper">
-                            <NavLink className="profile-link" to={'/profile/' + post._ownerId} >
+                            <NavLink className="profile-link" to={'/dummy-profile/' + post.userUN} >
                                 <h6 className="user-info-body">
                                     {post.userFN} {post.userLN}
                                     <span className="small-text">@{post.userUN}</span>
@@ -106,25 +48,25 @@ export default function HomePostCard({ user, post, updatePosts }) {
                         </div>
                         <ul>
                             <li>
-                                <NavLink className="details-link comment" to={"/details/" + post._id}>
+                                <NavLink className="details-link comment" to={"/dummy-details/" + post._id}>
                                     <i className="fa-solid fa-comment"></i>
-                                    <span className="small-text">{commentsCount}</span>
+                                    <span className="small-text">{dummyComments.filter(x => x.postId === post._id).length}</span>
                                 </NavLink>
 
                             </li>
-                            <li onClick={(e) => likeHandler(e)}>
+                            <li>
                                 <div className="like">
                                     <i className="fa-solid fa-heart" style={{
-                                        color: isLiked ? '#E52B50' : ''
+                                        color: '#E52B50'
                                     }}></i>
-                                    <span className="small-text">{likesCount}</span>
+                                    <span className="small-text">{post.likesCount}</span>
                                 </div>
                             </li>
                             {user._id === post._ownerId ?
                                 (
 
                                     <li className="details-li">
-                                        <i onClick={() => deletePostHandler()} className="fa-solid fa-trash"></i>
+                                        <i className="fa-solid fa-trash"></i>
                                     </li>
                                 ) : <li></li>}
                         </ul>

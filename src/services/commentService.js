@@ -37,6 +37,20 @@ export const getComments = async (postId) => {
         throw result;
     }
 }
+export const getAllComments = async () => {
+    const response = await fetch(`${baseUrl}/data/comments`, {
+        headers: { 
+            'Content-type': 'application/json',
+        },
+    });
+    const result = await response.json()
+    if (response.ok) {
+        return result;
+    } else {
+        throw result;
+    }
+}
+
 
 export const getCommentCount = async (postId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=postId%3D%22${postId}%22&count`, {
@@ -64,6 +78,20 @@ export const deleteComment = async (commentId, accessToken) => {
 
     const result = await response.json();
 
+    if (response.ok) {
+        return result;
+    } else {
+        throw result;
+    }
+}
+
+export const getCommentByUser = async (userId) => {
+    const response = await fetch(`${baseUrl}/data/comments?where=_ownerId%3D%22${userId}%22`, {
+        headers: { 
+            'Content-type': 'application/json',
+        },
+    });
+    const result = await response.json()
     if (response.ok) {
         return result;
     } else {

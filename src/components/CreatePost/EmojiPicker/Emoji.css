@@ -74,3 +74,10 @@ aside.emoji-picker-react {
 #popover-basic {
     z-index: 999;
 }
+
+.popover {
+    position: absolute;
+    background-color: var(--background-color);
+    border-radius: 20px;
+    border: 1px solid var(--blue-color);
+}

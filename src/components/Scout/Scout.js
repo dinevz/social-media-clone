@@ -76,11 +76,12 @@ export default function Scout() {
                 <form ref={ref} className="scout-searchbar-form" autoComplete="off">
                     <input ref={target} className="scout-searchbar" type="text" name="searchbar" placeholder={'Search users'} onChange={(e) => searchUser(e.target.value)}/>
                     <Overlay
+                        className="scout"
                         rootClose={true}
                         transition={true}
                         show={searchUserModal}
                         target={target.current}
-                        placement={'bottom-start'}
+                        placement={'auto'}
                         container={ref}
                         onHide={()=> closeSearchModal()}
                     >

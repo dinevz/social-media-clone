@@ -6,7 +6,7 @@ import { deleteComment } from "../../services/commentService"
 import * as profileService from "../../services/profileService"
 import { getLikesCount, like, getIsLiked, dislike } from '../../services/likeService';
 
-export default function Comment({ comment, user, updateComments }) {
+export default function Comment({ comment, user, updateComments, children }) {
     const [profile, setProfile] = useState({
         avatar: '',
         firstName: '',
@@ -45,7 +45,8 @@ export default function Comment({ comment, user, updateComments }) {
             return
         }
         if (!isLiked) {
-            like(comment._id, user.accessToken)
+            console.log(profile);
+            like(comment._id, profile.username, 'comment', user.accessToken)
                 .then(res => {
                     setLikesCount(oldState => oldState + 1)
                     setIsLiked(true);
@@ -67,16 +68,21 @@ export default function Comment({ comment, user, updateComments }) {
         <div className="post-container comments">
             {comment._createdOn ? (
                 <>
-                    <img class="user-avatar" src={profile.avatar ? profile.avatar : "/assets/images/default_user_icon.jpg"} alt="User" />
+                    <img className="user-avatar" src={profile.avatar ? profile.avatar : "/assets/images/default_user_icon.jpg"} alt="User" />
                     <div className="post-text-container">
+                        <div className="top-link-wrapper">
+
                         <NavLink className="profile-link" to={'/profile/' + profile._ownerId} >
                             <h6 className="user-info-body">
                                 {profile.firstName} {profile.lastName}
                                 <span className="small-text">@{profile.username}</span>
                                 <span className="small-text"> • </span>
                                 <span className="small-text">{timestampConverter(comment._createdOn)} ago</span>
+                                
                             </h6>
                         </NavLink>
+                        <span className="small-text"> {children ? children : ''} </span>
+                        </div>
                         <p className="text-body">{comment.content ? postContentShortener(comment.content).join('\n') : ''}</p>
                         <div className="media-container home-card">
                             {comment.media ?

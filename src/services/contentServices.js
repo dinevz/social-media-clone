@@ -99,3 +99,19 @@ export const deletePost = async (postId, accessToken) => {
         throw result;
     }
 }
+
+export const getPostByUser = async (userId) => {
+    const response = await fetch(`${baseUrl}/data/posts?where=_ownerId%3D%22${userId}%22`, {
+        headers: {
+            'Content-type': 'application/json',
+        },
+    })
+
+    const result = await response.json()
+
+    if (response.ok) {
+        return result;
+    } else {
+        throw result;
+    }
+}

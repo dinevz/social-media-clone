@@ -69,7 +69,7 @@
     color: var(--blue-color);
 }
 
-.popover {
+.popover.scout {
     position: absolute;
     top: -5px!important;
     inset: 0px auto auto 0px;

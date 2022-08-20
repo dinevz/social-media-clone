@@ -46,7 +46,8 @@
 }
 
 .user-avatar, .post-container .user-avatar {
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     align-self: self-start;
 }
@@ -88,7 +89,7 @@
 
 .user-info-body {
     margin-left: 5px;
-    display: inline-block;
+    width: 100%;
 }
 .text-body {
     color: #D6D9DB;

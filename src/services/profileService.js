@@ -1,6 +1,6 @@
 const baseUrl = 'https://postterr.herokuapp.com';
 
-export const createProfile = async (user, accessToken) => {
+export const createProfile = async (user, email, accessToken) => {
     const response = await fetch(`${baseUrl}/data/profile`, {
         method: "POST",
         headers: {
@@ -13,6 +13,7 @@ export const createProfile = async (user, accessToken) => {
             lastName: user.lastName,
             username: user.username,
             about: user.about,
+            email: email,
         })
     })
 
@@ -68,7 +69,7 @@ export const getMyPosts = async (authToken, userId) => {
     }
 }
 
-export const getMyCommentsCount = async (userId) => {
+export const getCommentsCount = async (userId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=_ownerId%3D%22${userId}%22&count`, {
         headers: {
             'Content-type': 'application/json',
@@ -82,7 +83,7 @@ export const getMyCommentsCount = async (userId) => {
     }
 }
 
-export const getMyPostsCount = async (userId) => {
+export const getPostsCount = async (userId) => {
     const response = await fetch(`${baseUrl}/data/posts?where=_ownerId%3D%22${userId}%22&count`, {
         headers: {
             'Content-type': 'application/json',
