@@ -9,12 +9,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
-    height: 400px;
     color: white;
 }
 .login-container form {
-    margin: auto;
+    margin: 10% auto;
 }
 
 #email, #password {
@@ -43,3 +41,51 @@
 .login-container form button:hover {
     opacity: 0.8;
 }
+
+.login-header {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The Modal (background) */
+.login-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(211,211,211,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .login-modal-content {
+    background-color: var(--background-color);
+    margin: auto;
+    /* padding: 20px; */
+    border: 1px solid var(--border-color);
+    width: 600px;
+    height: 500px;
+    border-radius: 20px;
+  }
+  
+  /* The Close Button */
+  .login-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .login-close:hover,
+  .login-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }

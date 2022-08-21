@@ -11,9 +11,9 @@ export const login = async (email, password) => {
             password: password,
         })
     });
-    
+
     const result = await response.json();
-    if(response.ok) {
+    if (response.ok) {
         return result;
     } else {
         throw result;
@@ -31,16 +31,20 @@ export const register = async (email, password) => {
             password: password,
         })
     });
-
-    const result = await response.json();
-    if(response.ok) {
-        delete result["password"];
-        return result;
+    if (response.status !== 200) {
+        throw response
     } else {
-        throw result;
+        const result = await response.json();
+        if (response.ok) {
+            delete result["password"];
+            return result;
+        } else {
+            throw result;
+        }
     }
 }
 
-export const logout = async (authToken) => await fetch(`${baseUrl}/users/logout`, {headers: {'X-Authorization': authToken,},});
+
+export const logout = async (authToken) => await fetch(`${baseUrl}/users/logout`, { headers: { 'X-Authorization': authToken, }, });
 
 

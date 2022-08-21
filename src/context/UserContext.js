@@ -54,7 +54,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     const onRegister = (result, accessToken, _id) => {
-        console.log(result);
         setUser({...result, accessToken, _id});
     }
 

@@ -6,8 +6,11 @@ import { getNews } from '../../services/bingSearchService';
 import { searchByUsername } from '../../services/profileService';
 import { useAuth } from '../../context/UserContext';
 import { NavLink } from 'react-router-dom';
+import { getDummyComments, getDummyPosts } from '../../services/dummyData';
+import DummyHomePostCard from '../Home/DummyHomePostCard';
 
 const categories = [
+    { category: 'Posts', icon: 'fa-solid fa-globe' },
     { category: 'World news', icon: 'fa-solid fa-globe' },
     { category: 'Crypto news', icon: 'fa-brands fa-bitcoin' },
     { category: 'Sports', icon: 'fa-solid fa-globe' },
@@ -20,23 +23,35 @@ export default function Scout() {
     const [isLoading, setIsLoading] = useState(true);
     const [searchUserModal, setSearchUserModal] = useState(false);
     const [searchResult, setSearchResult] = useState(null);
-
+    const [dummyComments, setDummyComments] = useState([]);
     const { user } = useAuth();
     const ref = useRef(null);
     const target = useRef(null);
     
     useEffect(() => {
         let unsubscribed = false;
-        getNews(isActive.category)
+        if(isActive.category === 'Posts') {
+            getDummyPosts()
             .then(res => {
-                if (!unsubscribed) {
-                    setNews(res.value);
-                    setIsLoading(false);
-                }
+                setIsLoading(false);
+                setNews(Object.values(res));
             })
-            .catch(err => {
-                console.log(err);
+            getDummyComments()
+            .then(res => {
+                setDummyComments(Object.values(res));
             })
+        } else {
+            getNews(isActive.category)
+                .then(res => {
+                    if (!unsubscribed) {
+                        setNews(res.value);
+                        setIsLoading(false);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
         return () => {
             unsubscribed = true;
         }
@@ -49,7 +64,7 @@ export default function Scout() {
     }
 
     const searchUser = (username) => {
-        searchByUsername(user.accessToken, username)
+        searchByUsername(username)
         .then(res => {
             setSearchResult(res[0]);
             setSearchUserModal(target.current.value.length > 0);
@@ -119,14 +134,14 @@ export default function Scout() {
             {isLoading ? <Spinner />
                 : (
                     <div className="news-wrapper">
-                        {news.length > 0 ? news.map(x => (
+                        {news.length > 0 && isActive.category !== 'Posts' ? news.map(x => (
                             <a className="news-link" key={x.url} rel="noreferrer" target="_blank" href={x.url}>
                                 <div className="news-card">
                                     <p><i className={isActive.icon}></i> {x.provider[0].name}</p>
                                     <p className="news-description">{x.description}</p>
                                 </div>
                             </a>
-                        )) : ''}
+                        )) : news.map(x => <DummyHomePostCard post={x} dummyComments={dummyComments} user={user}/>)}
                     </div>
                 )}
 

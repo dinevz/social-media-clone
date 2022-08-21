@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
-import { isAuthenticated } from '../../hoc/isAuthenticated';
 import CreatePost from '../CreatePost/CreatePost';
 import { getDummyComments, getDummyPosts } from '../../services/dummyData';
 import DummyHomePostCard from '../Home/DummyHomePostCard';
@@ -53,4 +52,4 @@ function DummyPostDetail() {
     )
 }
 
-export default isAuthenticated(DummyPostDetail);
+export default DummyPostDetail;

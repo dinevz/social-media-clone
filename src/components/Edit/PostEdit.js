@@ -16,6 +16,7 @@ export default function PostEdit () {
     const { update } = useContext(PostContext);
     const { id } = useParams();
     const [post, setPost] = useState({});
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
     useEffect(() => {
         getPost(id)
@@ -45,6 +46,11 @@ export default function PostEdit () {
         })
         .catch(err => console.log(err))
     }
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        setShowEmojiPicker(!showEmojiPicker);
+    };
 
     return (
         <div className="home-container">
@@ -87,7 +93,7 @@ export default function PostEdit () {
                                 
                                 <div className="home-buttons-wrappers">
                                     <div className="emoji-buttons-wrappers">
-                                        <EmojiPicker contentUpdate={contentUpdate} />
+                                        <EmojiPicker contentUpdate={contentUpdate} handleClick={handleClick} show={showEmojiPicker}/>
                                         <GifPicker mediaUpdate={mediaUpdate}/>
                                         <ImageUpload />
                                     </div>

@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from 'react'
 import { useAuth } from '../../context/UserContext'
 import { NavLink, useParams } from 'react-router-dom';
 import * as profileService from '../../services/profileService'
-import { isAuthenticated } from '../../hoc/isAuthenticated'
 import Spinner from '../Spinner/Spinner';
 import { getPostByUser } from '../../services/contentServices';
 import HomePostCard from '../Home/HomePostCard';
@@ -166,4 +165,4 @@ function Profile() {
     )
 }
 
-export default isAuthenticated(Profile);
+export default Profile;

@@ -97,11 +97,8 @@ export const getPostsCount = async (userId) => {
     }
 }
 
-export const searchByUsername = async (authToken, username) => {
+export const searchByUsername = async (username) => {
     const response = await fetch(`${baseUrl}/data/profile?where=username%3D%22${username}%22`, {
-        headers: {
-            'X-Authorization': authToken,
-        },
     });
     const result = await response.json()
     if (response.ok) {

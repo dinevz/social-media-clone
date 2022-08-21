@@ -10,6 +10,7 @@ export default function Register() {
     const [step, setStep] = useState(1);
     const [userInfo, setUserInfo] = useState({});
     const [isLoading, setIsLoading] = useState(false);
+    const [modalShow, setModalShow] = useState(true);
     const navigate = useNavigate();
     const { onRegister } = useAuth();
 
@@ -20,15 +21,26 @@ export default function Register() {
             if(step === 2) {
                 authService.register(e.target.email.value, e.target.password.value)
                 .then(result => {
-                    profileService.createProfile(userInfo, e.target.email.value, result.accessToken)
+                    if(result !== undefined) {
+                        profileService.createProfile(userInfo, e.target.email.value, result.accessToken)
                         .then(res => {
                             onRegister({...res}, result.accessToken, result._id);
                             setStep(1);
+                            setModalShow(false);
                             navigate(`/profile/${result._id}`);
                             setIsLoading(false);
                         })
+                    }
+                })
+                .catch(err => {
+                    if(err.status === 409) {
+                        e.target.password.value = '';
+                        e.target.password2.value = ''
+                        e.target.email.value = ''
+                        setStep(1);
+                        alert('User with this email already exists');
+                    }
                 });
-                setIsLoading(true);
             }
         } else {
             alert("password dont match")
@@ -51,9 +63,13 @@ export default function Register() {
         setStep(step + 1);
     }
     return (
+        <div style={{display: modalShow ? 'block' : 'none'}} className="register-modal">
+        <div className="register-modal-content">
+            
+            
         <div className="register-container">
             <div className="header">
-                <h4 className="title">Register<i className="fa-solid fa-user-pen"></i></h4>
+                <h4 className="title">Register<span className="register-close" onClick={() => navigate(-1)}>&times;</span></h4>
             </div>
             {isLoading ? <Spinner /> : step === 1 ?
                 <form method="POST" onSubmit={(e) => stepChange(e)}>
@@ -94,6 +110,8 @@ export default function Register() {
             }
 
 
+        </div>
+        </div>
         </div>
     )
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../context/UserContext'
-import { NavLink, useParams } from 'react-router-dom';
-import { isAuthenticated } from '../../hoc/isAuthenticated'
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../Spinner/Spinner';
 import { getDummyComments, getDummyPosts, getDummyProfile } from '../../services/dummyData';
 import DummyHomePostCard from '../Home/DummyHomePostCard';
@@ -17,6 +16,7 @@ function Profile() {
     const [isLoading, setIsLoading] = useState(true);
     const [dummyComments, setDummyComments] = useState([]);
     const [dummyPosts, setdummyPosts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getDummyProfile(id)
@@ -43,7 +43,8 @@ function Profile() {
     return (
         <div className="profile-container">
             <div className="header">
-                <h4 className="title">Profile<i className="fa-solid fa-user fa-fw me-3"></i></h4>
+                <h4 className="title">Profile<button className="details-link-back" onClick={() => navigate(-1)}><i className="fa-solid fa-arrow-left"></i></button></h4>
+                
             </div>
             {isLoading ? <Spinner /> : (
                 <>
@@ -95,4 +96,4 @@ function Profile() {
     )
 }
 
-export default isAuthenticated(Profile);
+export default Profile;

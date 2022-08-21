@@ -7,8 +7,9 @@ import { PostContext } from '../../context/postsContext';
 import { getDummyPosts } from '../../services/dummyData';
 import DummyHomePostCard from './DummyHomePostCard';
 import { getDummyComments } from "../../services/dummyData";
+import { isAuthenticated } from '../../hoc/isAuthenticated';
 
-export default function Home() {
+function Home() {
     const { user } = useAuth();
     const { posts, update } = useContext(PostContext);
     const [dummyPosts, setDummyPosts] = useState([]);
@@ -42,3 +43,5 @@ export default function Home() {
         </div >
     )
 }
+
+export default isAuthenticated(Home);

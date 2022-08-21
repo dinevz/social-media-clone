@@ -1,6 +1,4 @@
 .register-container {
-    width: 600px;
-    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -9,8 +7,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px;
-    height: 600px;
     color: white;
 }
 .register-container form {
@@ -53,3 +49,43 @@
     padding: 5px;
     margin-left: 5px;
 }
+
+/* The Modal (background) */
+.register-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(211,211,211,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .register-modal-content {
+    background-color: var(--background-color);
+    margin: auto;
+    /* padding: 20px; */
+    border: 1px solid var(--border-color);
+    width: 600px;
+    height: 500px;
+    border-radius: 20px;
+  }
+  
+  /* The Close Button */
+  .register-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .register-close:hover,
+  .register-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }

@@ -33,7 +33,6 @@ export default function CreatePost({update, parentClass, hideModalHandler, comme
         }
         contentService.createPost(user, postContent, postMedia)
             .then(res => {
-                console.log(res);
                 setPostContent('');
                 setPostMedia('');
                 setShowEmojiPicker(false);

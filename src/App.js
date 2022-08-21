@@ -13,6 +13,7 @@ import PostEdit from './components/Edit/PostEdit';
 import Scout from './components/Scout/Scout';
 import DummyProfile from './components/Profile/DummyProfile';
 import DummyPostDetail from './components/Details/DummyPostDetail';
+import LandingPage from './components/LandingPage/LandingPage';
 
 // <CoingeckoWidget /> -> coingecko component
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Navbar />
           <div className="routes-container">
             <Routes>
+              <Route path='/' element={<LandingPage />} />
               <Route path='home' element={<Home />} />
               <Route path='login' element={<Login />} />
               <Route path='register' element={<Register />} />

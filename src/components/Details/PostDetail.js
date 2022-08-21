@@ -2,7 +2,6 @@ import './PostDetail.css';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
-import { isAuthenticated } from '../../hoc/isAuthenticated';
 import { getPost } from '../../services/contentServices';
 import * as commentService from '../../services/commentService';
 import Comment from './Comment';
@@ -68,4 +67,4 @@ function PostDetail() {
     )
 }
 
-export default isAuthenticated(PostDetail);
+export default PostDetail;

@@ -7,11 +7,10 @@ import { timestampConverter } from "../../helpers/timestampConverter";
 
 export default function DummyHomePostCard({ post, user , dummyComments }) {
     
-
     
     return (
         <div className="post-container">
-            {post._createdOn ? (
+            {post?._createdOn ? (
                 <>
                     <img className="user-avatar" src={post.userImg ? post.userImg : "/assets/images/default_user_icon.jpg"} alt="User" />
                     <div className="post-text-container">
