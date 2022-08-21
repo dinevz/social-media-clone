@@ -31,7 +31,7 @@ export default function Login() {
 
     return (
         <div style={{display: modalShow ? 'block' : 'none'}} className="login-modal">
-        <div class="login-modal-content">
+        <div className="login-modal-content">
             <div className="login-container">
                 <div className="login-header">
                     <h4 className="title">Login <span class="close" onClick={() => closeLoginHandler()}>&times;</span></h4>
