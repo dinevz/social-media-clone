@@ -147,7 +147,6 @@
 }
 .media-container {
     border-top: 1px solid var(--border-color);
-    position: relative;
     padding-top: 10px;
 }
 
