@@ -15,9 +15,8 @@ export default function Login() {
         let password = e.target.password.value;
         authService.login(email, password)
         .then(res => {
-            onLogin(res);
             setModalShow(false);
-            navigate("/home")
+            onLogin(res);
         })
         .catch(err => {
             console.error(err)

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as profileService from '../services/profileService'
 
 
@@ -6,6 +7,7 @@ const UserContext = createContext();
 
 
 export const AuthProvider = ({ children }) => {
+    const navigate = useNavigate();
     const [user, setUser] = useState({
         _id: '',
         accessToken: '',
@@ -26,7 +28,8 @@ export const AuthProvider = ({ children }) => {
                     avatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.KIz3_UC1SOjPRGPn0PVw3AAAAA%26pid%3DApi&f=1',
                 }, result.email, result.accessToken)
                 .then(res => {
-                    setUser({...res, accessToken: result.accessToken, _id: result._id})
+                    setUser({...res, accessToken: result.accessToken, _id: result._id});
+                    navigate("/home");
                 })
         } else {
 
@@ -37,6 +40,7 @@ export const AuthProvider = ({ children }) => {
                         ...result,
                         _id: result._id,
                     })
+                    navigate("/home");
                 })
         }
     };

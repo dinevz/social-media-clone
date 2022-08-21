@@ -14,6 +14,7 @@ import Scout from './components/Scout/Scout';
 import DummyProfile from './components/Profile/DummyProfile';
 import DummyPostDetail from './components/Details/DummyPostDetail';
 import LandingPage from './components/LandingPage/LandingPage';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 // <CoingeckoWidget /> -> coingecko component
 function App() {
@@ -37,6 +38,7 @@ function App() {
               <Route path='scout' element={<Scout />} />
               <Route path='dummy-profile/:id/' element={<DummyProfile />} />
               <Route path='dummy-details/:id/' element={<DummyPostDetail/>} />
+              <Route path='*' element={<ErrorPage />} />
             </Routes>
           </div>
         </PostProvider>
