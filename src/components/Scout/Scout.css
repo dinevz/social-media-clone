@@ -83,6 +83,8 @@
 
 .post-container.search-result {
     padding: 1rem;
+    background: none;
+    border: none;
 }
 
 .user-info-body.search-result {
@@ -99,4 +101,9 @@
 .post-text-container.search-result {
     display: flex;
     justify-content: space-between;
+}
+
+.scout-popover {
+    width: 90%;
+    height: 400px;
 }

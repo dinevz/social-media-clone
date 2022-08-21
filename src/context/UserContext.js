@@ -7,7 +7,7 @@ const UserContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({
-        id: '',
+        _id: '',
         accessToken: '',
         username: '',
         firstName: '',
@@ -17,19 +17,33 @@ export const AuthProvider = ({ children }) => {
     });
 
     const onLogin = (result) => {
-        profileService.getProfile(result._id)
-            .then(res => {
-                setUser({
-                    ...res[0],
-                    ...result,
-                    _id: result._id,
+        if(result.email === 'peter@abv.bg' || result.email === 'george@abv.bg' || result.email === 'admin@abv.bg') {
+            profileService.createProfile(
+                {   firstName: 'Test',
+                    lastName: 'Anon',
+                    about: 'bg',
+                    username: result.username,
+                    avatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.KIz3_UC1SOjPRGPn0PVw3AAAAA%26pid%3DApi&f=1',
+                }, result.email, result.accessToken)
+                .then(res => {
+                    setUser({...res, accessToken: result.accessToken, _id: result._id})
                 })
-            })
+        } else {
+
+            profileService.getProfile(result._id)
+                .then(res => {
+                    setUser({
+                        ...res[0],
+                        ...result,
+                        _id: result._id,
+                    })
+                })
+        }
     };
 
     const onLogout = () => {
         setUser({
-            id: '',
+            _id: '',
             accessToken: '',
             username: '',
             firstName: '',

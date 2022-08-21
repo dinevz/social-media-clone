@@ -16,7 +16,7 @@ export default function DummyHomePostCard({ post, user , dummyComments }) {
                     <img className="user-avatar" src={post.userImg ? post.userImg : "/assets/images/default_user_icon.jpg"} alt="User" />
                     <div className="post-text-container">
                         <div className="post-text-wrapper">
-                            <NavLink className="profile-link" to={'/dummy-profile/' + post.userUN} >
+                            <NavLink className="profile-link" to={'/dummy-profile/' + post._ownerId} >
                                 <h6 className="user-info-body">
                                     {post.userFN} {post.userLN}
                                     <span className="small-text">@{post.userUN}</span>

@@ -12,6 +12,7 @@ import { PostProvider } from './context/postsContext';
 import PostEdit from './components/Edit/PostEdit';
 import Scout from './components/Scout/Scout';
 import DummyProfile from './components/Profile/DummyProfile';
+import DummyPostDetail from './components/Details/DummyPostDetail';
 
 // <CoingeckoWidget /> -> coingecko component
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path='edit/:id/' element={<PostEdit />} />
               <Route path='scout' element={<Scout />} />
               <Route path='dummy-profile/:id/' element={<DummyProfile />} />
+              <Route path='dummy-details/:id/' element={<DummyPostDetail/>} />
             </Routes>
           </div>
         </PostProvider>

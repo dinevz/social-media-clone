@@ -1,6 +1,6 @@
 import './PostDetail.css';
 import { useContext, useEffect, useState } from 'react';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
 import { isAuthenticated } from '../../hoc/isAuthenticated';
 import { getPost } from '../../services/contentServices';
@@ -16,7 +16,7 @@ function PostDetail() {
     const { update } = useContext(PostContext);
     const { id } = useParams();
     const [post, setPost] = useState({});
-    const [comments, setComments] = useState([{ content: '' }]);
+    const [comments, setComments] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import { decode } from 'html-entities';
 import { useContext, useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { timestampConverter } from '../../helpers/timestampConverter';
 import { getCommentCount } from '../../services/commentService';
 import { deletePost } from '../../services/contentServices';
@@ -15,7 +15,6 @@ export default function HomePostCard({ user, post, updatePosts }) {
     const [commentsCount, setCommentsCount] = useState(0);
     const [likesCount, setLikesCount] = useState(0);
     const [isLiked, setIsLiked] = useState(false);
-    const navigate = useNavigate();
     const { update } = useContext(PostContext); 
 
     useEffect(() => {
@@ -49,7 +48,6 @@ export default function HomePostCard({ user, post, updatePosts }) {
             getIsLiked(post._id)
                 .then(res => {
                     let likeId = res.filter(x => x._ownerId === user._id)
-                    console.log(res);
                     dislike(likeId[0]._id, user.accessToken)
                         .then(result => {
                             setLikesCount(oldState => oldState - 1)

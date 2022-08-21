@@ -41,13 +41,6 @@ export const register = async (email, password) => {
     }
 }
 
-export const logout = async (authToken) => {
-    const response = await fetch(`${baseUrl}/users/logout`, {
-        headers: {
-            'X-Authorization': authToken,
-        },
-    });
+export const logout = async (authToken) => await fetch(`${baseUrl}/users/logout`, {headers: {'X-Authorization': authToken,},});
 
-    console.log(response);
 
-}

@@ -138,3 +138,11 @@ p.small-text {
     background-color: rgb(145, 100, 145);
     color: black;
 }
+
+p.nothing-to-show-text {
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-top: 50px;
+}

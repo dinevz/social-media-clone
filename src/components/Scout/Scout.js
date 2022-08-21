@@ -81,11 +81,11 @@ export default function Scout() {
                         transition={true}
                         show={searchUserModal}
                         target={target.current}
-                        placement={'auto'}
+                        placement={'bottom-end'}
                         container={ref}
                         onHide={()=> closeSearchModal()}
                     >
-                        <Popover id="popover-basic">
+                        <Popover id="popover-basic" className='scout-popover'>
                             
                         <div className="post-container search-result">
                             {searchResult ? (

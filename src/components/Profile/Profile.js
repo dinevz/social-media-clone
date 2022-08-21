@@ -131,9 +131,9 @@ function Profile() {
                             <button>Message</button>
                         </div>
                         <div className="profile-card-stats-container">
-                            <div className="stats-container"><p>0</p><p>research</p></div>
                             <div className="stats-container"><p>{myPosts.length}</p><p>posts</p></div>
                             <div className="stats-container"><p>{myComments.length}</p><p>comments</p></div>
+                            <div className="stats-container"><p>{likes.length}</p><p>likes</p></div>
                         </div>
                     </div>
                     <div className="profile-posts-container">
@@ -144,15 +144,19 @@ function Profile() {
                     {isLoading.categories ? <Spinner /> : 
                     (
                         <>
-                        {isActive === 'Posts' && myPosts.length > 0 ? myPosts.map(x => <HomePostCard key={x._id} post={x} user={user} updatePosts={updatePosts} />) : ''}
-                        {isActive === 'Comments' && myComments.length > 0 && posts.length > 0 ? 
+                        {isActive === 'Posts' && myPosts.length > 0 ? myPosts.map(x => <HomePostCard key={x._id} post={x} user={user} updatePosts={updatePosts} />) 
+                        : isActive === 'Comments' && myComments.length > 0 && posts.length > 0 ? 
                         myComments.map(x => 
                             <Comment key={x._id} comment={x} user={user} updateComments={updateComments}>
-                                <NavLink className="posted-by" to={`/details/${posts.filter(y => y._id === x.postId)[0]._id}`}>on post by: {posts.filter(y => y._id === x.postId)[0].userUN}</NavLink>
+                                <NavLink className="posted-by" to={`/details/${posts.filter(y => y._id === x.postId)[0]?._id}`}>on post by: {posts.filter(y => y._id === x.postId)[0]?.userUN}</NavLink>
                             </Comment>
-                        ) : ''}
-                        {isActive === 'Likes' && likes.length > 0 ? likes.map(x => 
-                        <p className='small-text' key={x._id}><span className='username-profile'>{profile.username}</span> liked <NavLink className="profile-link-style" to={getPostId(x)}>{x.type}</NavLink> by <NavLink to={'/profile/' + getUserId(x)} className='username-profile'>{x.username}</NavLink> {timestampConverter(x._createdOn)} ago</p>) : ''}
+                        ) 
+                        : isActive === 'Likes' && likes.length > 0 ? likes.map(x => 
+                        <p className='small-text' key={x._id}>
+                            <span className='username-profile'>{profile.username}</span> liked 
+                            <NavLink className="profile-link-style" to={getPostId(x)}>{x.type}</NavLink> by 
+                            <NavLink to={'/profile/' + getUserId(x)} className='username-profile'>{x.username}</NavLink> {timestampConverter(x._createdOn)} ago</p>) 
+                        : <p className="nothing-to-show-text">Nothing to show yet</p>}
                         </>
                     ) }
                     
