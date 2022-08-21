@@ -22,8 +22,7 @@
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    opacity: 0.6;
-    color: var(--text-color);
+    color: var(--border-color);
     background: var(--background-color);
     border: 0;
     outline: 0;
@@ -31,7 +30,8 @@
 
 .tabs-btn.active {
     border-bottom: 3px solid var(--blue-color);
-    opacity: 1;
+    color: var(--text-color);
+    opacity: 1.5;
 }
 
 .tabs-wrapper {
