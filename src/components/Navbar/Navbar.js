@@ -16,9 +16,10 @@ export default function Navbar({update}) {
         onLogout();
     }
     
+    const showContainer = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/register'
 
     return (
-        <div className="navbar-container" style={{display: location.pathname === '/' ? 'none' : 'block'}}>
+        <div className="navbar-container" style={{display: showContainer ? 'none' : 'block'}}>
 
 
                 {user.accessToken ?
