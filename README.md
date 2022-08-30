@@ -2,7 +2,7 @@
 
 Link to see the project -> https://postter-front-end.herokuapp.com/
 
-Test accounts peter@abv.bg/george@abv.bg password 123456
+Test accounts peter@abv.bg / george@abv.bg password 123456
 
 Back-end SoftUni practice server.
 
