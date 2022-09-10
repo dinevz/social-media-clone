@@ -1,15 +1,10 @@
-import { useState } from "react";
 import CreatePost from "./CreatePost";
 import { useContext } from 'react';
 import { PostContext } from '../../context/postsContext';
 
 export default function CreatePostModal() {
-    const [modalShow, setModalShow] = useState(false);
-    const { update } = useContext(PostContext);
+    const { update, modalShow, hideModalHandler } = useContext(PostContext);
     
-    const hideModalHandler = () => {
-        setModalShow(false);
-    }
     const ModalComponent = ({show}) => {
         return(
             <div className="create-post-modal" style={{
@@ -18,7 +13,7 @@ export default function CreatePostModal() {
                 
                 <div className="create-post-modal-content">
                     <div className="create-post-modal-header">
-                        <span onClick={() => hideModalHandler()} className="close">&times;</span>
+                        <span onClick={() => hideModalHandler(false)} className="close">&times;</span>
                     </div>
                     
                     <CreatePost parentClass={"modal"} update={update} hideModalHandler={hideModalHandler}/>
@@ -29,7 +24,7 @@ export default function CreatePostModal() {
     return (
         <>
         
-            <button className="create-modal-btn" onClick={() => setModalShow(true)}>Post</button>
+            <button className="create-modal-btn" onClick={() => hideModalHandler(true)}>Post</button>
             <ModalComponent show={modalShow}/>
         </>
 

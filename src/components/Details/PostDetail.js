@@ -52,7 +52,7 @@ function PostDetail() {
     return (
         <div className="home-container">
             <div className="header">
-                <h4 className="title">post by {post.userUN} <button className="details-link-back" onClick={() => navigate(-1)}><i className="fa-solid fa-arrow-left"></i></button></h4>
+                <h4 className="title">post by {post.userUN} <button className="details-link-back" onClick={() => navigate('/home')}><i className="fa-solid fa-arrow-left"></i></button></h4>
             </div>
             <HomePostCard post={post} user={user} updatePosts={update}/>
             <CreatePost parentClass={'details'} commentObj={{id, setCommentsHandler,}}/>

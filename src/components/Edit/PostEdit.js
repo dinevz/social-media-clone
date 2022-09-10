@@ -100,7 +100,7 @@ export default function PostEdit () {
                                     <label htmlFor={"edit form-submit"} 
                                     role="button"
                                     disabled={!post.content && !post.media ? true : false}
-                                    className={"button " + (!post.content && !post.media ? "disabled" : "typing")}
+                                    className={"edit-button " + (!post.content && !post.media ? "disabled" : "typing")}
                                     tabIndex={0}
                                     >{'Edit'}</label>
                                 </div>

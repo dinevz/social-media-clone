@@ -37,7 +37,7 @@ export default function CreatePost({update, parentClass, hideModalHandler, comme
                 setPostMedia('');
                 setShowEmojiPicker(false);
                 update();
-                hideModalHandler();
+                hideModalHandler(false);
             }).catch(err => {
                 // console.log(err);
             })
@@ -101,9 +101,10 @@ export default function CreatePost({update, parentClass, hideModalHandler, comme
                                         <GifPicker mediaUpdate={mediaUpdate}/>
                                         <ImageUpload />
                                     </div>
-                                    <label htmlFor={parentClass + " form-submit"} 
+                                    <label 
+                                    htmlFor={parentClass + " form-submit"}
                                     role="button"
-                                    className={"button " + (!postContent && !postMedia ? "disabled" : "typing")}
+                                    className={parentClass + "-button " + (!postContent && !postMedia ? "disabled" : "typing")}
                                     tabIndex={0}
                                     >{parentClass === 'details' ? 'Comment' : 'Post'}</label>
                                 </div>

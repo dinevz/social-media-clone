@@ -1,5 +1,6 @@
 .home-container {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     height: 100%;
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
@@ -25,8 +26,9 @@
 .create-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    padding: 1.5rem;
 }
+
 .title {
     display: flex;
     justify-content: space-between;
@@ -110,6 +112,7 @@
     list-style: none;
     color: #D6D9DB;
     margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 5px;
     align-items: center;
 }

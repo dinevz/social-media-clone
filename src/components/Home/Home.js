@@ -14,6 +14,7 @@ function Home() {
     const { posts, update } = useContext(PostContext);
     const [dummyPosts, setDummyPosts] = useState([]);
     const [dummyComments, setDummyComments] = useState([]);
+    const [modalShow, setModalShow] = useState(false);
 
     useEffect(() => {
         getDummyPosts()
@@ -26,17 +27,18 @@ function Home() {
         })
     }, [])
 
-
+    const modalShowHandler = (value) => {
+        setModalShow(value);
+    }
     return (
         <div className="home-container">
             <div className="header">
                 <h4 className="title">Latest Posts<i className="fa-solid fa-bolt-lightning"></i></h4>
             </div>
-            <CreatePost parentClass={'home'} update={update}/>
+            <CreatePost parentClass={'home'} update={update} modalObject={{modalShowHandler: modalShowHandler, show: modalShow}}/>
             {
         posts.length >= 0 ? posts.sort((a, b) => b._createdOn - a._createdOn)
-            .map(post => <HomePostCard key={post._id} user={user} post={post} updatePosts={update}
-            />) : ''
+            .map(post => <HomePostCard key={post._id} user={user} post={post} updatePosts={update} parentClass={'home'}/>) : ''
     }
             {dummyPosts.length >= 0 ? dummyPosts.sort((a, b) => b._createdOn - a._createdOn)
             .map(dummyPost => <DummyHomePostCard key={dummyPost._id} post={dummyPost} dummyComments={dummyComments} user={user}/>) : ''}

@@ -5,7 +5,8 @@ export const PostContext = createContext();
 
 export const PostProvider = ({children}) => {
     const [posts, setPosts] = useState([])
-  
+    const [modalShow, setModalShow] = useState(false);
+
     useEffect(() => {
         update();
     }, [])
@@ -19,11 +20,18 @@ export const PostProvider = ({children}) => {
                 // console.error(err);
             })
     }
+
+    const hideModalHandler = (value) => {
+        setModalShow(value);
+    }
+
     return (
         <PostContext.Provider
         value={{
             posts,
             update,
+            modalShow,
+            hideModalHandler,
         }}>
             {children}
         </PostContext.Provider>

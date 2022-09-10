@@ -16,7 +16,7 @@
 
 .form-container {
     display: flex;
-    width: 500px;
+    width: 100%;
     align-items: center;
     flex-direction: column;
 }
@@ -29,7 +29,7 @@
     width: 100%;
 }
 
-.home-buttons-wrappers .button {
+.home-buttons-wrappers .home-button, .home-buttons-wrappers .modal-button, .details-button, .edit-button {
     width: 85px;
     height: 40px;
     align-self: self-end;
@@ -41,6 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: unset;
 }
 
 .home-buttons-wrappers .typing:hover {
@@ -50,8 +51,8 @@
 
 .media-container .media {
     object-fit: fill;
-    width: 500px;
-    height: 400px;
+    width: 100%;
+    height: auto;
     border-radius: 10px;
 }
 
@@ -86,7 +87,8 @@
     border: 1px solid #008CBA;
     border-radius: 10px;
     box-shadow: 0 5px 10px #efefef;
-    width: 650px;
+    width: 100%;
+    max-width: 600px;
     height: auto;
     overflow-x: hidden;
 }
@@ -103,8 +105,11 @@
     background-color: rgba(0, 0, 0, 0.9);
     
 }
+
 .disabled {
-    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #006282!important;
+    color: #959799!important;
 }
 
 .create-post-modal-header {

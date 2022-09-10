@@ -28,3 +28,23 @@ body {
   font-family: 'Montserrat', sans-serif;
   background-color: var(--background-color);
 }
+
+
+@media (max-width: 750px) {
+  .navbar a span, .navbar-noauth a span {
+    display: none;
+}
+
+  .navbar-container {
+    width: 16vw!important;
+  }
+
+  .create-modal-btn {
+    width: auto!important;
+    padding: 10px;
+}
+
+.post-container, .create-container {
+  padding: 1rem!important;
+}
+}

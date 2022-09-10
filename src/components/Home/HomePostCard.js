@@ -11,11 +11,11 @@ import { PostContext } from '../../context/postsContext';
 
 
 
-export default function HomePostCard({ user, post, updatePosts }) {
+export default function HomePostCard({ user, post, updatePosts, parentClass }) {
     const [commentsCount, setCommentsCount] = useState(0);
     const [likesCount, setLikesCount] = useState(0);
     const [isLiked, setIsLiked] = useState(false);
-    const { update } = useContext(PostContext); 
+    const { update, modalShow } = useContext(PostContext); 
 
     useEffect(() => {
         getCommentCount(post._id)
@@ -80,9 +80,8 @@ export default function HomePostCard({ user, post, updatePosts }) {
                                     <span className="small-text">{timestampConverter(post._createdOn)} ago</span>
                                 </h6>
                             </NavLink>
-                            {post._updatedOn ? <span className="small-text edited">Edited: {timestampConverter(post._updatedOn)} ago</span> : ''}
                             {post._ownerId === user._id ?
-                                <div className="dropdown">
+                                <div className="dropdown" style={{visibility: !modalShow ? 'visible' : 'hidden'}}>
                                     <span className="triple-dots" ><i className="fa-solid fa-ellipsis"></i></span>
                                     <div className="dropdown-content">
                                         <div className="dropdown-content-flex">
@@ -126,6 +125,7 @@ export default function HomePostCard({ user, post, updatePosts }) {
                                     </li>
                                 ) : <li></li>}
                         </ul>
+                        {post._updatedOn ? <span className="small-text edited">Last edited: {timestampConverter(post._updatedOn)} ago</span> : ''}
                     </div>
                 </>
             ) : ''}
