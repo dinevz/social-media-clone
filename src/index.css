@@ -47,4 +47,8 @@ body {
 .post-container, .create-container {
   padding: 1rem!important;
 }
+
+.home-container {
+  width: 100%!important;
+}
 }
